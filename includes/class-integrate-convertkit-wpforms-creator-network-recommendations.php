@@ -477,7 +477,7 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 		// Sanity check that we're using the ConvertKit WordPress Libraries 1.3.7 or higher.
 		// If another ConvertKit Plugin is active and out of date, its libraries might
 		// be loaded that don't have this method.
-		if ( ! method_exists( $api, 'recommendations_script' ) ) {
+		if ( ! method_exists( $api, 'recommendations_script' ) ) { // @phpstan-ignore-line Older WordPress Libraries won't have this method.
 			delete_option( $this->creator_network_recommendations_script_key . '_' . $account_id );
 			return false;
 		}
