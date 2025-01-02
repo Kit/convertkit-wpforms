@@ -476,6 +476,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 	 *
 	 * @since   1.7.9
 	 *
+	 * @param   array $form_data Form data and settings.
 	 * @return  string
 	 */
 	private function get_referrer_url( $form_data ) {
@@ -486,7 +487,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 			return esc_url( $form_data['entry_meta']['referer'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 
-		// If the request includes the page_url, return that URL
+		// If the request includes the page_url, return that URL.
 		if ( array_key_exists( 'page_url', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return esc_url( $_REQUEST['page_url'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}

@@ -58,7 +58,18 @@ class FormCest
 		);
 
 		// Check API to confirm subscriber was sent.
-		$I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+
+		// Load page with Form so grabFromCurrentUrl() returns correct URL.
+		$I->amOnPage('/?p=' . $pageID);
+
+		// Check that the subscriber has the expected form and referrer value set.
+		$I->apiCheckSubscriberHasForm(
+			$I,
+			$subscriberID,
+			$_ENV['CONVERTKIT_API_FORM_ID'],
+			$_ENV['TEST_SITE_WP_URL'] . $I->grabFromCurrentUrl()
+		);
 	}
 
 	/**
