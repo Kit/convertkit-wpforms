@@ -373,7 +373,11 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 							$response = $api->add_subscriber_to_legacy_form( $resource['id'], $subscriber['subscriber']['id'] );
 						} else {
 							// Add subscriber to form.
-							$response = $api->add_subscriber_to_form( $resource['id'], $subscriber['subscriber']['id'] );
+							$response = $api->add_subscriber_to_form(
+								$resource['id'],
+								$subscriber['subscriber']['id'],
+								$this->get_referrer_url( $form_data )
+							);
 						}
 						break;
 
@@ -461,6 +465,34 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 				)
 			);
 		}
+
+	}
+
+	/**
+	 * Gets the referrer URL to send to the `form_subscribe` API method.
+	 *
+	 * Falls back to the action's AJAX URL if the Post ID the form was
+	 * embedded in cannot be determined.
+	 *
+	 * @since   1.7.9
+	 *
+	 * @return  string
+	 */
+	private function get_referrer_url( $form_data ) {
+
+		// If the form data includes the referer, return that URL
+		// as it will include any UTM parameters.
+		if ( array_key_exists( 'entry_meta', $form_data ) && array_key_exists( 'referer', $form_data['entry_meta'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return esc_url( $form_data['entry_meta']['referer'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		}
+
+		// If the request includes the page_url, return that URL
+		if ( array_key_exists( 'page_url', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return esc_url( $_REQUEST['page_url'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		}
+
+		// Return the AJAX URL.
+		return home_url( add_query_arg( null, null ) );
 
 	}
 
