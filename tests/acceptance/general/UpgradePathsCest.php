@@ -110,6 +110,7 @@ class UpgradePathsCest
 			'field_id'  => '0',
 			'settings'  => [
 				'store_spam_entries' => '0',
+				'submit_text'        => 'Submit',
 			],
 		];
 
