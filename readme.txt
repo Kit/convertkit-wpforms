@@ -3,8 +3,8 @@ Contributors: nathanbarry, convertkit, billerickson
 Donate link: https://kit.com
 Tags: form, wpforms, convertkit, email, marketing
 Requires at least: 5.0
-Tested up to: 6.7
-Stable tag: 1.7.8
+Tested up to: 6.7.1
+Stable tag: 1.7.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ No. You must first have an account on kit.com, but you do not have to use a paid
 2. WPForms Kit Form Settings when editing a WPForms Form at Marketing > Kit
 
 == Changelog ==
+
+### 1.7.9 2025-01-23
+* Added: Populate the referrer property when a WPForms Form is configured to subscribe an email address to a Kit Form
+* Updated: ConvertKit WordPress Libraries to 2.0.6
 
 ### 1.7.8 2024-11-13
 * Added: OAuth: Issue site-specific Access and Refresh Token when using the same Kit account on multiple WordPress sites

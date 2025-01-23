@@ -1,15 +1,15 @@
-# Copyright (C) 2024 Kit
+# Copyright (C) 2025 Kit
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.7.7\n"
+"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.7.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/convertkit-wpforms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-11-13T02:06:36+00:00\n"
+"POT-Creation-Date: 2025-01-23T02:49:51+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: integrate-convertkit-wpforms\n"
@@ -220,45 +220,45 @@ msgid "No Form ID was specified."
 msgstr ""
 
 #. translators: Resource type
-#: includes/class-integrate-convertkit-wpforms.php:404
+#: includes/class-integrate-convertkit-wpforms.php:408
 msgid "The resource type %s is unsupported."
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:591
+#: includes/class-integrate-convertkit-wpforms.php:624
 msgid "Try Kit for Free"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:675
+#: includes/class-integrate-convertkit-wpforms.php:708
 msgid "Kit: Account connected successfully."
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:684
+#: includes/class-integrate-convertkit-wpforms.php:717
 msgid "Kit: "
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:844
+#: includes/class-integrate-convertkit-wpforms.php:877
 msgid "Kit: Email"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:850
+#: includes/class-integrate-convertkit-wpforms.php:883
 msgid "Kit: First Name"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:855
+#: includes/class-integrate-convertkit-wpforms.php:888
 msgid "Kit: Tag"
 msgstr ""
 
 #. translators: ConvertKit Custom Field label
-#: includes/class-integrate-convertkit-wpforms.php:883
+#: includes/class-integrate-convertkit-wpforms.php:916
 msgid "Kit: Custom Field: %s"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:918
+#: includes/class-integrate-convertkit-wpforms.php:951
 msgid "No Kit connections exist."
 msgstr ""
 
 #. translators: WPForms ConvertKit Account ID
-#: includes/class-integrate-convertkit-wpforms.php:926
+#: includes/class-integrate-convertkit-wpforms.php:959
 msgid "The Kit connection with ID %s was unregistered."
 msgstr ""
 
