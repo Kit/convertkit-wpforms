@@ -205,7 +205,7 @@ class RecommendationsCest
 		// Wait for Creator Network Recommendations modal to display.
 		$I->waitForElementVisible('.formkit-modal');
 		$I->switchToIFrame('.formkit-modal iframe');
-		$I->waitForElementVisible('div[data-component="Page"]');
+		$I->waitForElementVisible('main[data-component="Page"]');
 		$I->switchToIFrame();
 
 		// Close the modal.
