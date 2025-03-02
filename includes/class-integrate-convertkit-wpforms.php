@@ -489,7 +489,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 
 		// If the request includes the page_url, return that URL.
 		if ( array_key_exists( 'page_url', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			return esc_url( $_REQUEST['page_url'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return esc_url( sanitize_text_field( wp_unslash( $_REQUEST['page_url'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 
 		// Return the AJAX URL.
@@ -715,7 +715,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 				sprintf(
 					'%s %s',
 					esc_html__( 'Kit: ', 'integrate-convertkit-wpforms' ),
-					sanitize_text_field( $_REQUEST['error_description'] ) // phpcs:ignore WordPress.Security.NonceVerification
+					sanitize_text_field( wp_unslash( $_REQUEST['error_description'] ) ) // phpcs:ignore WordPress.Security.NonceVerification
 				)
 			);
 		}
@@ -733,7 +733,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 		if ( ! array_key_exists( 'page', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			return;
 		}
-		if ( $_REQUEST['page'] !== 'wpforms-settings' ) { // phpcs:ignore WordPress.Security.NonceVerification
+		if ( sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) !== 'wpforms-settings' ) { // phpcs:ignore WordPress.Security.NonceVerification
 			return;
 		}
 
@@ -750,7 +750,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 		}
 
 		// Sanitize token.
-		$authorization_code = sanitize_text_field( $_REQUEST['code'] ); // phpcs:ignore WordPress.Security.NonceVerification
+		$authorization_code = sanitize_text_field( wp_unslash( $_REQUEST['code'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
 
 		// Exchange the authorization code and verifier for an access token.
 		$api    = new Integrate_ConvertKit_WPForms_API(
@@ -843,7 +843,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 		}
 
 		// Sanitize data.
-		$account_id = sanitize_text_field( $_POST['key'] );
+		$account_id = sanitize_text_field( wp_unslash( $_POST['key'] ) );
 
 		// Get API instance.
 		$api = $this->get_api_instance( $account_id );
