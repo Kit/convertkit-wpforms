@@ -63,10 +63,10 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 	/**
 	 * Holds the creator network settings that were defined when saving
 	 * a WPForms Form.
-	 * 
-	 * @since 	1.8.0
-	 * 
-	 * @var 	bool|array
+	 *
+	 * @since   1.8.0
+	 *
+	 * @var     bool|array
 	 */
 	private $creator_network_settings = false;
 
@@ -79,10 +79,10 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 
 		add_filter( 'wpforms_builder_settings_sections', array( $this, 'settings_section' ), 20, 1 );
 		add_action( 'wpforms_form_settings_panel_content', array( $this, 'settings_section_content' ), 20 );
-		add_filter( 'wpforms_save_form_args', array( $this, 'store_settings_on_form_edit', 10, 2 ) );
-		add_action( 'wpforms_save_form', array( $this, 'apply_stored_settings_on_form_save', 10, 2 ) );
+		add_filter( 'wpforms_save_form_args', array( $this, 'store_settings_on_form_edit' ), 10, 2 );
+		add_action( 'wpforms_save_form', array( $this, 'apply_stored_settings_on_form_save' ) );
 		add_action( 'wpforms_frontend_js', array( $this, 'maybe_enqueue_creator_network_recommendations_script' ) );
-		
+
 	}
 
 	/**
@@ -241,17 +241,21 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 	/**
 	 * Store the form values for Creator Network Recommendations when the Form's save button is clicked,
 	 * immediately before the form is saved in WPForms.
-	 * 
-	 * @since 	1.8.0
+	 *
+	 * @since   1.8.0
+	 *
+	 * @param   array $post_data  WPForms Form posted data on save.
+	 * @param   array $form_data  WPForms Form settings data posted on save.
+	 * @return  array
 	 */
 	public function store_settings_on_form_edit( $post_data, $form_data ) {
 
-		// Define the settings which will be saved to the WPForms Form in @TODO.
+		// Define the settings which will be saved to the WPForms Form.
 		$this->creator_network_settings = array(
 			$this->connection_id_key => ( isset( $form_data['settings'][ $this->connection_id_key ] ) ? $form_data['settings'][ $this->connection_id_key ] : '' ),
 			$this->creator_network_recommendations_script_key => ( isset( $form_data['settings'][ $this->creator_network_recommendations_script_key ] ) ? $form_data['settings'][ $this->creator_network_recommendations_script_key ] : '' ),
 		);
-		
+
 		return $post_data;
 
 	}
@@ -260,41 +264,44 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 	 * Apply the form values for Creator Network Recommendations after the form is saved in WPForms,
 	 * because WPForms Lite 1.4.0 and higher introduces a nasty bug where changes made to settings
 	 * on an existing WPForms Form won't be honored.
-	 * 
-	 * @since 	1.8.0
+	 *
+	 * @param   int $form_id    WPForms Form ID.
+	 *
+	 * @since   1.8.0
 	 */
-	public function apply_stored_settings_on_form_save( $form_id, $form ) {
+	public function apply_stored_settings_on_form_save( $form_id ) {
 
 		// Bail if Creator Network settings isn't an array.
-			if ( ! $this->creator_network_settings ) {
-				return;
-			}
+		if ( ! $this->creator_network_settings ) {
+			return;
+		}
 
-			// Get Form.
-			$form = get_post( $form_id );
+		// Get Form.
+		$form = get_post( $form_id );
 
-			// Bail if the Form could not be fetched.
-			if ( ! $form ) {
-				return;
-			}
+		// Bail if the Form could not be fetched.
+		if ( ! $form ) {
+			return;
+		}
 
-			// Decode WPForms Form settings.
-			$data = wpforms_decode( $form->post_content );
+		// Decode WPForms Form settings.
+		$data = wpforms_decode( $form->post_content );
 
-			// Bail if the WPForms Form settings could not be decoded.
-			if ( ! $data ) {
-				return;
-			}
+		// Bail if the WPForms Form settings could not be decoded.
+		if ( ! $data ) {
+			return;
+		}
 
-			// Merge settings.
-			$data['settings'] = array_merge( $data['settings'], $this->creator_network_settings );
-			error_log( print_r( $data['settings'], true ) );
+		// Merge settings.
+		$data['settings'] = array_merge( $data['settings'], $this->creator_network_settings );
 
-			// Update Post.
-			wp_update_post( array(
+		// Update Post.
+		wp_update_post(
+			array(
 				'ID'           => $form_id,
 				'post_content' => wpforms_encode( $data ),
-			) );
+			)
+		);
 
 	}
 
@@ -321,9 +328,6 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 			if ( ! $this->form_creator_network_recommendations_enabled( $form ) ) {
 				continue;
 			}
-
-			echo '<pre>' . print_r( $form, true ) . '</pre>';
-			var_dump( $this->form_get_connection( $form ) );
 
 			// Fetch Creator Network Recommendations script URL.
 			$script_url = $this->get_creator_network_recommendations_script( $this->form_get_connection( $form ) );
