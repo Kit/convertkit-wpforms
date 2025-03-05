@@ -109,8 +109,10 @@ class UpgradePathsCest
 			// Other required settings.
 			'field_id'  => '0',
 			'settings'  => [
-				'store_spam_entries' => '0',
-				'submit_text'        => 'Submit',
+				'store_spam_entries'       => '0',
+				'submit_text'              => 'Submit',
+				'convertkit_connection_id' => '',
+				'convertkit_wpforms_creator_network_recommendations' => '',
 			],
 		];
 
