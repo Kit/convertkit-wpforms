@@ -251,9 +251,7 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 			}
 
 			// Fetch Creator Network Recommendations script URL.
-			var_dump( $this->form_get_connection( $form ) );
 			$script_url = $this->get_creator_network_recommendations_script( $this->form_get_connection( $form ) );
-			var_dump( $script_url );
 
 			// Bail if an error occured fetching the script, or no script exists,
 			// because Creator Network Recommendations are not enabled on the
@@ -372,6 +370,8 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 	 */
 	private function form_has_connection( $form ) {
 
+		echo '<pre>' . print_r( $form, true ) . '</pre>';
+
 		if ( ! array_key_exists( $this->connection_id_key, $form['settings'] ) ) {
 			return false;
 		}
@@ -395,6 +395,7 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 	private function form_get_connection( $form ) {
 
 		if ( ! $this->form_has_connection( $form ) ) {
+			var_dump( 'form does not have connection' );
 			return false;
 		}
 
