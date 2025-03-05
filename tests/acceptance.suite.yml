@@ -58,6 +58,7 @@ modules:
             capabilities:
                 chromeOptions:
                     args: [
+                        "--headless=new",
                         "--disable-gpu",
                         "--user-agent=HeadlessChrome"
                     ]

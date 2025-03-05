@@ -483,7 +483,6 @@ class WPForms extends \Codeception\Module
 		$I->click('label[for="wpforms-panel-field-settings-convertkit_wpforms_creator_network_recommendations"]');
 
 		// Click Save.
-		$I->wait(1);
 		$I->click('#wpforms-save');
 
 		// Wait for save to complete.

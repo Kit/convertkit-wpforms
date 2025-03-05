@@ -329,9 +329,6 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 				continue;
 			}
 
-			// Bail if no connection exists.
-			$connection = $this->form_get_connection( $form );
-
 			// Fetch Creator Network Recommendations script URL.
 			$script_url = $this->get_creator_network_recommendations_script( $this->form_get_connection( $form ) );
 
