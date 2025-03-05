@@ -395,7 +395,6 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 	private function form_get_connection( $form ) {
 
 		if ( ! $this->form_has_connection( $form ) ) {
-			var_dump( 'form does not have connection' );
 			return false;
 		}
 
