@@ -262,7 +262,7 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 
 	/**
 	 * Apply the form values for Creator Network Recommendations after the form is saved in WPForms,
-	 * because WPForms Lite 1.4.0 and higher introduces a nasty bug where changes made to settings
+	 * because WPForms Lite 1.9.4.0 and higher introduces a nasty bug where changes made to settings
 	 * on an existing WPForms Form won't be honored.
 	 *
 	 * @param   int $form_id    WPForms Form ID.
