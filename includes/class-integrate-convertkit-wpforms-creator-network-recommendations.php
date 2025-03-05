@@ -370,8 +370,6 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 	 */
 	private function form_has_connection( $form ) {
 
-		echo '<pre>' . print_r( $form, true ) . '</pre>';
-
 		if ( ! array_key_exists( $this->connection_id_key, $form['settings'] ) ) {
 			return false;
 		}
