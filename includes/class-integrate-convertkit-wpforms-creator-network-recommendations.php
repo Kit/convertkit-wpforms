@@ -254,10 +254,6 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 			$connection = $this->form_get_connection( $form );
 			echo '<pre>' . print_r( $form, true ) . '</pre>';
 			var_dump( $connection );
-			if ( ! $connection ) {
-				var_dump( 'no connection exists' );
-				continue;
-			}
 
 			// Fetch Creator Network Recommendations script URL.
 			$script_url = $this->get_creator_network_recommendations_script( $this->form_get_connection( $form ) );
