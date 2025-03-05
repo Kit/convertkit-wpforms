@@ -80,8 +80,6 @@ class RecommendationsCest
 		// Check that no PHP warnings or notices were output.
 		$I->checkNoWarningsAndNoticesOnScreen($I);
 
-		$I->see('xxxxxxxxx');
-
 		// Confirm the recommendations script was not loaded, as the API Key and Secret are invalid.
 		$I->dontSeeCreatorNetworkRecommendationsScript($I, $pageID);
 	}
