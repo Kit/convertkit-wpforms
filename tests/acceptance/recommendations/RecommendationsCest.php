@@ -31,9 +31,11 @@ class RecommendationsCest
 	{
 		// Setup Plugin with invalid API Key and Secret.
 		$accountID = $I->setupWPFormsIntegration($I, 'fakeAccessToken', 'fakeRefreshToken');
+		var_dump( $accountID );
 
 		// Create Form.
 		$wpFormsID = $I->createWPFormsForm($I);
+		var_dump( $wpFormsID );
 
 		// Enable Creator Network Recommendations on the form's settings using the account specified.
 		$I->enableWPFormsSettingCreatorNetworkRecommendations($I, $wpFormsID, $accountID);
