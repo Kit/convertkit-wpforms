@@ -251,7 +251,9 @@ class Integrate_ConvertKit_WPForms_Creator_Network_Recommendations {
 			}
 
 			// Fetch Creator Network Recommendations script URL.
+			var_dump( $this->form_get_connection( $form ) );
 			$script_url = $this->get_creator_network_recommendations_script( $this->form_get_connection( $form ) );
+			var_dump( $script_url );
 
 			// Bail if an error occured fetching the script, or no script exists,
 			// because Creator Network Recommendations are not enabled on the

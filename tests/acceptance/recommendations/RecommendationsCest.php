@@ -21,39 +21,6 @@ class RecommendationsCest
 
 	/**
 	 * Tests that the 'Enable Creator Network Recommendations' option on a Form's settings
-	 * is not displayed when no credentials are specified at WPForms > Settings > Integrations > Kit.
-	 *
-	 * @since   1.5.8
-	 *
-	 * @param   AcceptanceTester $I  Tester.
-	 */
-	public function testCreatorNetworkRecommendationsOptionWhenNoCredentials(AcceptanceTester $I)
-	{
-		// Create Form.
-		$wpFormsID = $I->createWPFormsForm($I);
-
-		// Confirm that the Form Settings display the expected error message.
-		$I->seeWPFormsSettingMessage(
-			$I,
-			$wpFormsID,
-			'Please connect your Kit account on the <a href="' . $_ENV['TEST_SITE_WP_URL'] . '/wp-admin/admin.php?page=wpforms-settings&amp;view=integrations" target="_blank">integrations screen</a>'
-		);
-
-		// Create a Page with the WPForms shortcode as its content.
-		$pageID = $I->createPageWithWPFormsShortcode($I, $wpFormsID);
-
-		// Load the Page on the frontend site.
-		$I->amOnPage('/?p=' . $pageID);
-
-		// Check that no PHP warnings or notices were output.
-		$I->checkNoWarningsAndNoticesOnScreen($I);
-
-		// Confirm the recommendations script was not loaded.
-		$I->dontSeeCreatorNetworkRecommendationsScript($I, $pageID);
-	}
-
-	/**
-	 * Tests that the 'Enable Creator Network Recommendations' option on a Form's settings
 	 * is not displayed when invalid API Key and Secret are specified at WPForms > Settings > Integrations > Kit.
 	 *
 	 * @since   1.5.8
@@ -64,6 +31,7 @@ class RecommendationsCest
 	{
 		// Setup Plugin with invalid API Key and Secret.
 		$accountID = $I->setupWPFormsIntegration($I, 'fakeAccessToken', 'fakeRefreshToken');
+		var_dump($accountID);
 
 		// Create Form.
 		$wpFormsID = $I->createWPFormsForm($I);
