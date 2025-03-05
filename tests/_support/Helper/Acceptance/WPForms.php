@@ -475,7 +475,6 @@ class WPForms extends \Codeception\Module
 		$I->seeElementInDOM('.wpforms-panel-content-section-convertkit');
 
 		// Select account.
-		// @TODO This fails!!!!!!!!!!
 		if ($accountID) {
 			$I->selectOption('#wpforms-panel-field-settings-convertkit_connection_id', $accountID);
 		}
@@ -483,9 +482,8 @@ class WPForms extends \Codeception\Module
 		// Enable Creator Network Recommendations.
 		$I->click('label[for="wpforms-panel-field-settings-convertkit_wpforms_creator_network_recommendations"]');
 
-		$I->see('xxxxxxxxx');
-
 		// Click Save.
+		$I->wait(1);
 		$I->click('#wpforms-save');
 
 		// Wait for save to complete.
