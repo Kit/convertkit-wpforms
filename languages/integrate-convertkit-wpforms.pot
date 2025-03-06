@@ -2,16 +2,16 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.7.9\n"
+"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/convertkit-wpforms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-25T02:11:41+00:00\n"
+"POT-Creation-Date: 2025-03-06T09:32:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: integrate-convertkit-wpforms\n"
 
 #. Plugin Name of the plugin
@@ -32,8 +32,8 @@ msgstr ""
 
 #. Author of the plugin
 #: integrate-convertkit-wpforms.php
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:86
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:101
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:98
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:113
 msgid "Kit"
 msgstr ""
 
@@ -159,55 +159,55 @@ msgstr ""
 msgid "Kit API Error: The response is not of the expected type array."
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:103
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:115
 msgid "Creator Network Recommendations"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:109
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:121
 msgid "The \"Enable AJAX form submission\" setting must be enabled on this form at Settings > General for the Creator Network Recommendations feature."
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:121
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:133
 msgid "Please connect your Kit account on the"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:123
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:135
 msgid "integrations screen"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:140
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:152
 msgid "Fix settings"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:148
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:160
 msgid "Creator Network Recommendations requires a"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:150
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:162
 msgid "paid Kit Plan"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:161
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:173
 msgid "Select Account"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:164
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:176
 msgid "-- Select Account --"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:173
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:185
 msgid "Enable Creator Network Recommendations"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:175
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:187
 msgid "If enabled, displays the Creator Network Recommendations modal when this form is submitted."
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:297
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:376
 msgid "Connected on"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:465
+#: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:544
 msgid "The account specified in the Form's Settings > Kit does not exist"
 msgstr ""
 

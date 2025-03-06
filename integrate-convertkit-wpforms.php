@@ -9,7 +9,7 @@
  * Plugin Name: Kit (formerly ConvertKit) for WPForms
  * Plugin URI:  https://kit.com
  * Description: Create Kit signup forms using WPForms
- * Version:     1.7.9
+ * Version:     1.8.0
  * Author:      Kit
  * Author URI:  https://kit.com
  * Text Domain: integrate-convertkit-wpforms
@@ -28,7 +28,7 @@ define( 'INTEGRATE_CONVERTKIT_WPFORMS_NAME', 'ConvertKitWPForms' ); // Used for 
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_FILE', plugin_basename( __FILE__ ) );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_URL', plugin_dir_url( __FILE__ ) );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_PATH', __DIR__ );
-define( 'INTEGRATE_CONVERTKIT_WPFORMS_VERSION', '1.7.9' );
+define( 'INTEGRATE_CONVERTKIT_WPFORMS_VERSION', '1.8.0' );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_CLIENT_ID', '147qqKJeENYp5MqgL6AOShDDcLK3UQeClmcIV1ij3gI' );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_REDIRECT_URI', 'https://app.kit.com/wordpress/redirect' );
 
