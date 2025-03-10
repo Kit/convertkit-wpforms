@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\EndToEnd;
+
+use Tests\Support\EndToEndTester;
+
 /**
  * Tests the ConvertKit Review Notification.
  *
@@ -11,9 +16,9 @@ class ReviewRequestCest
 	 *
 	 * @since   1.5.5
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _before(AcceptanceTester $I)
+	public function _before(EndToEndTester $I)
 	{
 		$I->activateConvertKitPlugin($I);
 		$I->activateThirdPartyPlugin($I, 'wpforms-lite');
@@ -25,9 +30,9 @@ class ReviewRequestCest
 	 *
 	 * @since   1.5.5
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testReviewRequestNotificationDisplaysAndDismisses(AcceptanceTester $I)
+	public function testReviewRequestNotificationDisplaysAndDismisses(EndToEndTester $I)
 	{
 		// Set review request option with a timestamp in the past, to emulate
 		// the Plugin having set this a few days ago.
@@ -60,9 +65,9 @@ class ReviewRequestCest
 	 *
 	 * @since   1.5.5
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _passed(AcceptanceTester $I)
+	public function _passed(EndToEndTester $I)
 	{
 		$I->deactivateConvertKitPlugin($I);
 

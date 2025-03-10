@@ -1,5 +1,5 @@
 <?php
-namespace Helper\Acceptance;
+namespace Tests\Support\Helper;
 
 /**
  * Helper methods and actions related to the ConvertKit Plugin,

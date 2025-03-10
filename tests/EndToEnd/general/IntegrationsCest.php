@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\EndToEnd;
+
+use Tests\Support\EndToEndTester;
+
 /**
  * Tests that the ConvertKit Integration options work at WPForms > Settings > Integrations
  *
@@ -11,9 +16,9 @@ class IntegrationsCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _before(AcceptanceTester $I)
+	public function _before(EndToEndTester $I)
 	{
 		$I->activateConvertKitPlugin($I);
 		$I->activateThirdPartyPlugin($I, 'wpforms-lite');
@@ -25,9 +30,9 @@ class IntegrationsCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testAddIntegrationWithValidCredentials(AcceptanceTester $I)
+	public function testAddIntegrationWithValidCredentials(EndToEndTester $I)
 	{
 		// Load WPForms > Settings > Integrations.
 		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=integrations');
@@ -105,9 +110,9 @@ class IntegrationsCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testAddIntegrationWithInvalidAPICredentials(AcceptanceTester $I)
+	public function testAddIntegrationWithInvalidAPICredentials(EndToEndTester $I)
 	{
 		// Define OAuth error code and description.
 		$error            = 'access_denied';
@@ -128,9 +133,9 @@ class IntegrationsCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _passed(AcceptanceTester $I)
+	public function _passed(EndToEndTester $I)
 	{
 		$I->deactivateConvertKitPlugin($I);
 

@@ -1,5 +1,5 @@
 <?php
-namespace Helper\Acceptance;
+namespace Tests\Support\Helper;
 
 /**
  * Helper methods and actions related to the ConvertKit API,
@@ -7,7 +7,7 @@ namespace Helper\Acceptance;
  *
  * @since   1.4.0
  */
-class ConvertKitAPI extends \Codeception\Module
+class KitAPI extends \Codeception\Module
 {
 	/**
 	 * Returns an encoded `state` parameter compatible with OAuth.

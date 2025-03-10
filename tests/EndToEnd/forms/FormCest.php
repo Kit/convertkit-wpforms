@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\EndToEnd;
+
+use Tests\Support\EndToEndTester;
+
 /**
  * Tests that the Plugin works when configuring and using WPForms.
  *
@@ -21,9 +26,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _before(AcceptanceTester $I)
+	public function _before(EndToEndTester $I)
 	{
 		$I->activateConvertKitPlugin($I);
 		$I->activateThirdPartyPlugin($I, 'wpforms-lite');
@@ -37,9 +42,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormToConvertKitFormMapping(AcceptanceTester $I)
+	public function testCreateFormToConvertKitFormMapping(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -82,9 +87,9 @@ class FormCest
 	 *
 	 * @since   1.7.8
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testConnectionRetainedWhenAccountReconnected(AcceptanceTester $I)
+	public function testConnectionRetainedWhenAccountReconnected(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$formID = $this->_wpFormsSetupFormOnly(
@@ -113,9 +118,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormToConvertKitLegacyFormMapping(AcceptanceTester $I)
+	public function testCreateFormToConvertKitLegacyFormMapping(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -145,9 +150,9 @@ class FormCest
 	 *
 	 * @since   1.7.2
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormToConvertKitTagMapping(AcceptanceTester $I)
+	public function testCreateFormToConvertKitTagMapping(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -180,9 +185,9 @@ class FormCest
 	 *
 	 * @since   1.7.2
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormToConvertKitSequenceMapping(AcceptanceTester $I)
+	public function testCreateFormToConvertKitSequenceMapping(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -215,9 +220,9 @@ class FormCest
 	 *
 	 * @since   1.7.2
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormSubscribeOnly(AcceptanceTester $I)
+	public function testCreateFormSubscribeOnly(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -248,9 +253,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithTagID(AcceptanceTester $I)
+	public function testCreateFormWithTagID(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -290,9 +295,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithInvalidTagID(AcceptanceTester $I)
+	public function testCreateFormWithInvalidTagID(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -332,9 +337,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithTagIDs(AcceptanceTester $I)
+	public function testCreateFormWithTagIDs(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -377,9 +382,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithTagName(AcceptanceTester $I)
+	public function testCreateFormWithTagName(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -419,9 +424,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithInvalidTagName(AcceptanceTester $I)
+	public function testCreateFormWithInvalidTagName(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -464,9 +469,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithTagNames(AcceptanceTester $I)
+	public function testCreateFormWithTagNames(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -509,9 +514,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithCustomField(AcceptanceTester $I)
+	public function testCreateFormWithCustomField(EndToEndTester $I)
 	{
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
@@ -675,9 +680,9 @@ class FormCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _passed(AcceptanceTester $I)
+	public function _passed(EndToEndTester $I)
 	{
 		$I->deactivateConvertKitPlugin($I);
 
