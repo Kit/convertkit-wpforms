@@ -58,7 +58,7 @@ jobs:
           'EndToEnd/forms',
           'EndToEnd/general',
           'EndToEnd/recommendations',
-          'wpunit'
+          'Integration'
         ]
 
     # Steps to install, configure and run tests

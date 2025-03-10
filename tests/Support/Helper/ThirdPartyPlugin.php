@@ -15,8 +15,8 @@ class ThirdPartyPlugin extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I     AcceptanceTester.
-	 * @param   string           $name  Plugin Slug.
+	 * @param   EndToEndTester $I     Tester.
+	 * @param   string         $name  Plugin Slug.
 	 */
 	public function activateThirdPartyPlugin($I, $name)
 	{
@@ -54,8 +54,8 @@ class ThirdPartyPlugin extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I      Acceptance Tester.
-	 * @param   string           $name   Plugin Slug.
+	 * @param   EndToEndTester $I      Tester.
+	 * @param   string         $name   Plugin Slug.
 	 */
 	public function deactivateThirdPartyPlugin($I, $name)
 	{

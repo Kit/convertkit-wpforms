@@ -557,13 +557,13 @@ class FormCest
 	 *
 	 * @since   1.7.2
 	 *
-	 * @param   AcceptanceTester $I             Tester.
-	 * @param   string           $optionName    <select> option name.
-	 * @param   bool|array       $tags          Values to use for tags.
-	 * @param   bool|array       $customFields  Custom field key / value pairs.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   string         $optionName    <select> option name.
+	 * @param   bool|array     $tags          Values to use for tags.
+	 * @param   bool|array     $customFields  Custom field key / value pairs.
 	 * @return  int                             Page ID
 	 */
-	private function _wpFormsSetupForm(AcceptanceTester $I, $optionName, $tags = false, $customFields = false)
+	private function _wpFormsSetupForm(EndToEndTester $I, $optionName, $tags = false, $customFields = false)
 	{
 		// Create Form.
 		$wpFormsID = $this->_wpFormsSetupFormOnly($I, $optionName, $tags, $customFields);
@@ -578,13 +578,13 @@ class FormCest
 	 *
 	 * @since   1.7.8
 	 *
-	 * @param   AcceptanceTester $I             Tester.
-	 * @param   string           $optionName    <select> option name.
-	 * @param   bool|array       $tags          Values to use for tags.
-	 * @param   bool|array       $customFields  Custom field key / value pairs.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   string         $optionName    <select> option name.
+	 * @param   bool|array     $tags          Values to use for tags.
+	 * @param   bool|array     $customFields  Custom field key / value pairs.
 	 * @return  int                             Form ID
 	 */
-	private function _wpFormsSetupFormOnly(AcceptanceTester $I, $optionName, $tags = false, $customFields = false)
+	private function _wpFormsSetupFormOnly(EndToEndTester $I, $optionName, $tags = false, $customFields = false)
 	{
 		// Define connection with valid API credentials.
 		$this->accountID = $I->setupWPFormsIntegration($I);
@@ -618,13 +618,13 @@ class FormCest
 	 *
 	 * @since   1.7.3
 	 *
-	 * @param   AcceptanceTester $I             Tester.
-	 * @param   int              $pageID        Page ID.
-	 * @param   string           $emailAddress  Email Address.
-	 * @param   bool|array       $tags          Tag checkbox value(s) to select.
-	 * @param   bool|string      $customField   Custom field value to enter.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   int            $pageID        Page ID.
+	 * @param   string         $emailAddress  Email Address.
+	 * @param   bool|array     $tags          Tag checkbox value(s) to select.
+	 * @param   bool|string    $customField   Custom field value to enter.
 	 */
-	private function _wpFormsCompleteAndSubmitForm(AcceptanceTester $I, int $pageID, string $emailAddress, $tags = false, $customField = false)
+	private function _wpFormsCompleteAndSubmitForm(EndToEndTester $I, int $pageID, string $emailAddress, $tags = false, $customField = false)
 	{
 		// Logout as the WordPress Administrator.
 		$I->logOut();

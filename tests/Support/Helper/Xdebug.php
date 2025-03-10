@@ -14,7 +14,7 @@ class Xdebug extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I Acceptance Tester.
+	 * @param   EndToEndTester $I Tester.
 	 */
 	public function checkNoWarningsAndNoticesOnScreen($I)
 	{
