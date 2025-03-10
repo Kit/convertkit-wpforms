@@ -41,7 +41,7 @@ class RecommendationsCest
 		$I->seeWPFormsSettingMessage(
 			$I,
 			$wpFormsID,
-			'Please connect your Kit account on the <a href="' . $_ENV['TEST_SITE_WP_URL'] . '/wp-admin/admin.php?page=wpforms-settings&amp;view=integrations" target="_blank">integrations screen</a>'
+			'Please connect your Kit account on the <a href="' . $_ENV['WORDPRESS_URL'] . '/wp-admin/admin.php?page=wpforms-settings&amp;view=integrations" target="_blank">integrations screen</a>'
 		);
 
 		// Create a Page with the WPForms shortcode as its content.

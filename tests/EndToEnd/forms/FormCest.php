@@ -73,7 +73,7 @@ class FormCest
 			$I,
 			$subscriberID,
 			$_ENV['CONVERTKIT_API_FORM_ID'],
-			$_ENV['TEST_SITE_WP_URL'] . $I->grabFromCurrentUrl()
+			$_ENV['WORDPRESS_URL'] . $I->grabFromCurrentUrl()
 		);
 	}
 

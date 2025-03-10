@@ -47,7 +47,7 @@ class IntegrationsCest
 		$I->seeInSource('<a href="https://app.kit.com/oauth/authorize?client_id=' . $_ENV['CONVERTKIT_OAUTH_CLIENT_ID'] . '&amp;response_type=code&amp;redirect_uri=' . urlencode( $_ENV['KIT_OAUTH_REDIRECT_URI'] ) );
 		$I->seeInSource(
 			'&amp;state=' . $I->apiEncodeState(
-				$_ENV['TEST_SITE_WP_URL'] . '/wp-admin/admin.php?page=wpforms-settings&view=integrations',
+				$_ENV['WORDPRESS_URL'] . '/wp-admin/admin.php?page=wpforms-settings&view=integrations',
 				$_ENV['CONVERTKIT_OAUTH_CLIENT_ID']
 			)
 		);
@@ -86,7 +86,7 @@ class IntegrationsCest
 		);
 		$I->assertStringContainsString(
 			'&state=' . $I->apiEncodeState(
-				$_ENV['TEST_SITE_WP_URL'] . '/wp-admin/admin.php?page=wpforms-settings&view=integrations',
+				$_ENV['WORDPRESS_URL'] . '/wp-admin/admin.php?page=wpforms-settings&view=integrations',
 				$_ENV['CONVERTKIT_OAUTH_CLIENT_ID']
 			),
 			$reconnectURL
