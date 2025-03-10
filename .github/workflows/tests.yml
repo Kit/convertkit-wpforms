@@ -51,14 +51,14 @@ jobs:
       fail-fast: false
       matrix:
         wp-versions: [ 'latest' ] #[ 'latest' ]
-        php-versions: [ '7.4', '8.0', '8.1', '8.2', '8.3' ] #[ '7.3', '7.4', '8.0', '8.1' ]
+        php-versions: [ '8.1', '8.2', '8.3' ] #[ '7.3', '7.4', '8.0', '8.1' ]
         
         # Folder names within the 'tests' folder to run tests in parallel.
         test-groups: [
-          'acceptance/forms',
-          'acceptance/general',
-          'acceptance/recommendations',
-          'wpunit'
+          'EndToEnd/forms',
+          'EndToEnd/general',
+          'EndToEnd/recommendations',
+          'Integration'
         ]
 
     # Steps to install, configure and run tests
@@ -253,7 +253,7 @@ jobs:
         working-directory: ${{ env.PLUGIN_DIR }}
         run: php vendor/bin/codecept build
 
-      # Run Codeception Acceptance Tests.
+      # Run Codeception End to End Tests.
       - name: Run tests/${{ matrix.test-groups }}
         working-directory: ${{ env.PLUGIN_DIR }}
         run: php vendor/bin/codecept run tests/${{ matrix.test-groups }} --fail-fast

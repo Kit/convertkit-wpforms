@@ -1,5 +1,5 @@
 <?php
-namespace Helper\Acceptance;
+namespace Tests\Support\Helper;
 
 /**
  * Helper methods and actions related to PHP's Xdebug,
@@ -14,7 +14,7 @@ class Xdebug extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I Acceptance Tester.
+	 * @param   EndToEndTester $I Tester.
 	 */
 	public function checkNoWarningsAndNoticesOnScreen($I)
 	{

@@ -1,5 +1,5 @@
 <?php
-namespace Helper\Acceptance;
+namespace Tests\Support\Helper;
 
 /**
  * Helper methods and actions related to the WPForms Plugin,
@@ -14,10 +14,10 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   bool|string      $accessToken   Access Token (if not specified, CONVERTKIT_OAUTH_ACCESS_TOKEN is used).
-	 * @param   bool|string      $refreshToken  Refresh Token (if not specified, CONVERTKIT_OAUTH_REFRESH_TOKEN is used).
-	 * @param   string           $accountID     Kit Account ID.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   bool|string    $accessToken   Access Token (if not specified, CONVERTKIT_OAUTH_ACCESS_TOKEN is used).
+	 * @param   bool|string    $refreshToken  Refresh Token (if not specified, CONVERTKIT_OAUTH_REFRESH_TOKEN is used).
+	 * @param   string         $accountID     Kit Account ID.
 	 * @return  string                          Account ID in WPForms.
 	 */
 	public function setupWPFormsIntegration($I, $accessToken = false, $refreshToken = false, $accountID = false)
@@ -46,10 +46,10 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.7.0
 	 *
-	 * @param   AcceptanceTester $I          AcceptanceTester.
-	 * @param   bool|string      $apiKey     API Key (if not specified, CONVERTKIT_API_KEY is used).
-	 * @param   bool|string      $apiSecret  API Secret (if not specified, CONVERTKIT_API_SECRET is used).
-	 * @param   string           $accountID  Kit Account ID.
+	 * @param   EndToEndTester $I          Tester.
+	 * @param   bool|string    $apiKey     API Key (if not specified, CONVERTKIT_API_KEY is used).
+	 * @param   bool|string    $apiSecret  API Secret (if not specified, CONVERTKIT_API_SECRET is used).
+	 * @param   string         $accountID  Kit Account ID.
 	 * @return  string                       Account ID in WPForms.
 	 */
 	public function setupWPFormsIntegrationWithAPIKeyAndSecret($I, $apiKey = false, $apiSecret = false, $accountID = false)
@@ -79,9 +79,9 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I            AcceptanceTester.
-	 * @param   string           $accessToken  Access Token.
-	 * @param   string           $refreshToken Refresh Token.
+	 * @param   EndToEndTester $I            Tester.
+	 * @param   string         $accessToken  Access Token.
+	 * @param   string         $refreshToken Refresh Token.
 	 */
 	public function checkWPFormsIntegrationExists($I, $accessToken, $refreshToken)
 	{
@@ -100,7 +100,7 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.7.8
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
+	 * @param   EndToEndTester $I             Tester.
 	 */
 	public function deleteWPFormsIntegration($I)
 	{
@@ -113,7 +113,7 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I AcceptanceTester.
+	 * @param   EndToEndTester $I Tester.
 	 * @return  int                 Form ID.
 	 */
 	public function createWPFormsFormForMigration($I)
@@ -237,8 +237,8 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I          AcceptanceTester.
-	 * @param   bool|array       $tagValues  Array of values for tag checkbox (Tag IDs or Tag names).
+	 * @param   EndToEndTester $I          Tester.
+	 * @param   bool|array     $tagValues  Array of values for tag checkbox (Tag IDs or Tag names).
 	 * @return  int                          Form ID.
 	 */
 	public function createWPFormsForm($I, $tagValues = false)
@@ -322,8 +322,8 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   int              $wpFormID      WPForms Form ID.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   int            $wpFormID      WPForms Form ID.
 	 */
 	public function disableAJAXFormSubmissionSetting($I, $wpFormID)
 	{
@@ -351,13 +351,13 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   int              $wpFormID      WPForms Form ID.
-	 * @param   bool|string      $formName      ConvertKit Form Name.
-	 * @param   bool|string      $nameField     First Name Field.
-	 * @param   bool|string      $emailField    Email Address Field.
-	 * @param   bool|array       $customFields  Custom Fields.
-	 * @param   bool|string      $tagField      Tag Field.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   int            $wpFormID      WPForms Form ID.
+	 * @param   bool|string    $formName      ConvertKit Form Name.
+	 * @param   bool|string    $nameField     First Name Field.
+	 * @param   bool|string    $emailField    Email Address Field.
+	 * @param   bool|array     $customFields  Custom Fields.
+	 * @param   bool|string    $tagField      Tag Field.
 	 */
 	public function configureConvertKitSettingsOnForm($I, $wpFormID, $formName, $nameField = false, $emailField = false, $customFields = false, $tagField = false)
 	{
@@ -433,9 +433,9 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I          AcceptanceTester.
-	 * @param   int              $wpFormID   WPForms Form ID.
-	 * @param   string           $message    Message.
+	 * @param   EndToEndTester $I          Tester.
+	 * @param   int            $wpFormID   WPForms Form ID.
+	 * @param   string         $message    Message.
 	 */
 	public function seeWPFormsSettingMessage($I, $wpFormID, $message)
 	{
@@ -459,9 +459,9 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   int              $wpFormID      WPForms Form ID.
-	 * @param   string           $accountID     WPForms Provider Account ID.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   int            $wpFormID      WPForms Form ID.
+	 * @param   string         $accountID     WPForms Provider Account ID.
 	 */
 	public function enableWPFormsSettingCreatorNetworkRecommendations($I, $wpFormID, $accountID = false)
 	{
@@ -494,10 +494,10 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   int              $wpFormID      WPForms Form ID.
-	 * @param   bool|string      $customField   Custom Field (if specified, adds a field whose value will be used as a ConvertKit Custom Field Value).
-	 * @param   bool|string      $tagField      Tag Field (if specified, adds a field whose value will be used as a ConvertKit Tag).
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   int            $wpFormID      WPForms Form ID.
+	 * @param   bool|string    $customField   Custom Field (if specified, adds a field whose value will be used as a ConvertKit Custom Field Value).
+	 * @param   bool|string    $tagField      Tag Field (if specified, adds a field whose value will be used as a ConvertKit Tag).
 	 */
 	public function configureWPFormsBackwardCompatClasses($I, $wpFormID, $customField = false, $tagField = false)
 	{
@@ -543,8 +543,8 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I      AcceptanceTester.
-	 * @param   int              $formID WPForms Form ID.
+	 * @param   EndToEndTester $I      Tester.
+	 * @param   int            $formID WPForms Form ID.
 	 * @return  int                         Page ID
 	 */
 	public function createPageWithWPFormsShortcode($I, $formID)
@@ -565,8 +565,8 @@ class WPForms extends \Codeception\Module
 	 *
 	 * @since   1.7.0
 	 *
-	 * @param   AcceptanceTester $I         AcceptanceTester.
-	 * @param   string           $accountID Account ID.
+	 * @param   EndToEndTester $I         Tester.
+	 * @param   string         $accountID Account ID.
 	 */
 	public function disconnectAccount($I, $accountID)
 	{

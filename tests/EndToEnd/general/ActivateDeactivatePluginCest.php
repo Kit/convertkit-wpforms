@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\EndToEnd;
+
+use Tests\Support\EndToEndTester;
+
 /**
  * Tests Plugin activation and deactivation.
  *
@@ -12,9 +17,9 @@ class ActivateDeactivatePluginCest
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testPluginActivationDeactivation(AcceptanceTester $I)
+	public function testPluginActivationDeactivation(EndToEndTester $I)
 	{
 		$I->activateConvertKitPlugin($I);
 		$I->activateThirdPartyPlugin($I, 'wpforms-lite');
@@ -28,9 +33,9 @@ class ActivateDeactivatePluginCest
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testPluginActivationDeactivationWithoutWPForms(AcceptanceTester $I)
+	public function testPluginActivationDeactivationWithoutWPForms(EndToEndTester $I)
 	{
 		$I->activateConvertKitPlugin($I);
 		$I->deactivateConvertKitPlugin($I);
