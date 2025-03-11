@@ -1,5 +1,5 @@
 <?php
-namespace Helper\Acceptance;
+namespace Tests\Support\Helper;
 
 /**
  * Helper methods and actions related to the ConvertKit Plugin,
@@ -15,7 +15,7 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I     AcceptanceTester.
+	 * @param   EndToEndTester $I     EndToEndTester.
 	 */
 	public function activateConvertKitPlugin($I)
 	{
@@ -28,7 +28,7 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I     AcceptanceTester.
+	 * @param   EndToEndTester $I     EndToEndTester.
 	 */
 	public function deactivateConvertKitPlugin($I)
 	{
@@ -41,9 +41,9 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.5.1
 	 *
-	 * @param   AcceptanceTester $I                 AcceptanceTester.
-	 * @param   string           $selectElement     <select> element.
-	 * @param   bool|array       $prependOptions    Option elements that should appear before the resources.
+	 * @param   EndToEndTester $I                 EndToEndTester.
+	 * @param   string         $selectElement     <select> element.
+	 * @param   bool|array     $prependOptions    Option elements that should appear before the resources.
 	 */
 	public function checkSelectFormOptionOrder($I, $selectElement, $prependOptions = false)
 	{
@@ -68,9 +68,9 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.5.1
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   string           $selectElement <select> element.
-	 * @param   array            $values        <option> values.
+	 * @param   EndToEndTester $I             EndToEndTester.
+	 * @param   string         $selectElement <select> element.
+	 * @param   array          $values        <option> values.
 	 */
 	public function checkSelectOptionOrder($I, $selectElement, $values)
 	{
@@ -97,7 +97,7 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.5.5
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
+	 * @param   EndToEndTester $I             EndToEndTester.
 	 */
 	public function reviewRequestExists($I)
 	{
@@ -111,7 +111,7 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.5.5
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
+	 * @param   EndToEndTester $I             EndToEndTester.
 	 */
 	public function reviewRequestDoesNotExist($I)
 	{
@@ -125,8 +125,8 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   int              $pageID        Page ID.
+	 * @param   EndToEndTester $I             EndToEndTester.
+	 * @param   int            $pageID        Page ID.
 	 */
 	public function seeCreatorNetworkRecommendationsScript($I, $pageID)
 	{
@@ -146,8 +146,8 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   int              $pageID        Page ID.
+	 * @param   EndToEndTester $I             EndToEndTester.
+	 * @param   int            $pageID        Page ID.
 	 */
 	public function dontSeeCreatorNetworkRecommendationsScript($I, $pageID)
 	{
@@ -167,8 +167,8 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.7.0
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   string           $accountID     Account ID.
+	 * @param   EndToEndTester $I             EndToEndTester.
+	 * @param   string         $accountID     Account ID.
 	 */
 	public function seeCachedResourcesInDatabase($I, $accountID)
 	{
@@ -183,8 +183,8 @@ class Plugin extends \Codeception\Module
 	 *
 	 * @since   1.7.0
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   string           $accountID     Account ID.
+	 * @param   EndToEndTester $I             EndToEndTester.
+	 * @param   string         $accountID     Account ID.
 	 */
 	public function dontSeeCachedResourcesInDatabase($I, $accountID)
 	{

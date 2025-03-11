@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\EndToEnd;
+
+use Tests\Support\EndToEndTester;
+
 /**
  * Tests that the Plugin works when configuring and using WPForms
  * with tag and custom field CSS classes, to ensure backward
@@ -13,9 +18,9 @@ class FormBackwardCompatCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _before(AcceptanceTester $I)
+	public function _before(EndToEndTester $I)
 	{
 		$I->activateConvertKitPlugin($I);
 		$I->activateThirdPartyPlugin($I, 'wpforms-lite');
@@ -30,9 +35,9 @@ class FormBackwardCompatCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithTagClass(AcceptanceTester $I)
+	public function testCreateFormWithTagClass(EndToEndTester $I)
 	{
 		// Define connection with valid API credentials.
 		$I->setupWPFormsIntegration($I);
@@ -107,9 +112,9 @@ class FormBackwardCompatCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithInvalidTag(AcceptanceTester $I)
+	public function testCreateFormWithInvalidTag(EndToEndTester $I)
 	{
 		// Define connection with valid API credentials.
 		$I->setupWPFormsIntegration($I);
@@ -181,9 +186,9 @@ class FormBackwardCompatCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithCustomField(AcceptanceTester $I)
+	public function testCreateFormWithCustomField(EndToEndTester $I)
 	{
 		// Define connection with valid API credentials.
 		$I->setupWPFormsIntegration($I);
@@ -257,9 +262,9 @@ class FormBackwardCompatCest
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreateFormWithInvalidCustomField(AcceptanceTester $I)
+	public function testCreateFormWithInvalidCustomField(EndToEndTester $I)
 	{
 		// Define connection with valid API credentials.
 		$I->setupWPFormsIntegration($I);
@@ -331,9 +336,9 @@ class FormBackwardCompatCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _passed(AcceptanceTester $I)
+	public function _passed(EndToEndTester $I)
 	{
 		$I->deactivateConvertKitPlugin($I);
 

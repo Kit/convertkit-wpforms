@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\EndToEnd;
+
+use Tests\Support\EndToEndTester;
+
 /**
  * Tests edge cases when upgrading between specific ConvertKit Plugin versions.
  *
@@ -12,9 +17,9 @@ class UpgradePathsCest
 	 *
 	 * @since   1.5.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testMigrateFormSettingsToIntegration(AcceptanceTester $I)
+	public function testMigrateFormSettingsToIntegration(EndToEndTester $I)
 	{
 		// Activate WPForms.
 		$I->activateThirdPartyPlugin($I, 'wpforms-lite');
@@ -48,9 +53,9 @@ class UpgradePathsCest
 	 *
 	 * @since   1.7.0
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testGetAccessTokenByAPIKeyAndSecret(AcceptanceTester $I)
+	public function testGetAccessTokenByAPIKeyAndSecret(EndToEndTester $I)
 	{
 		// Setup Plugin's settings with an API Key and Secret.
 		$I->setupWPFormsIntegrationWithAPIKeyAndSecret($I);
@@ -85,9 +90,9 @@ class UpgradePathsCest
 	 *
 	 * @since   1.7.2
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testFormSettingsPrefixAddedToSettingsOnUpgrade(AcceptanceTester $I)
+	public function testFormSettingsPrefixAddedToSettingsOnUpgrade(EndToEndTester $I)
 	{
 		// Activate WPForms and Plugin.
 		$I->activateThirdPartyPlugin($I, 'wpforms-lite');

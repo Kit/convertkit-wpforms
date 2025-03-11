@@ -1,5 +1,5 @@
 <?php
-namespace Helper\Acceptance;
+namespace Tests\Support\Helper;
 
 /**
  * Helper methods and actions related to the ConvertKit API,
@@ -7,7 +7,7 @@ namespace Helper\Acceptance;
  *
  * @since   1.4.0
  */
-class ConvertKitAPI extends \Codeception\Module
+class KitAPI extends \Codeception\Module
 {
 	/**
 	 * Returns an encoded `state` parameter compatible with OAuth.
@@ -45,10 +45,10 @@ class ConvertKitAPI extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   string           $emailAddress  Email Address.
-	 * @param   bool|string      $firstName     First Name.
-	 * @param   bool|array       $customFields  Custom Fields.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   string         $emailAddress  Email Address.
+	 * @param   bool|string    $firstName     First Name.
+	 * @param   bool|array     $customFields  Custom Fields.
 	 * @return  int                             Subscriber ID.
 	 */
 	public function apiCheckSubscriberExists($I, $emailAddress, $firstName = false, $customFields = false)
@@ -91,8 +91,8 @@ class ConvertKitAPI extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   string           $emailAddress   Email Address.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   string         $emailAddress   Email Address.
 	 */
 	public function apiCheckSubscriberDoesNotExist($I, $emailAddress)
 	{
@@ -118,10 +118,10 @@ class ConvertKitAPI extends \Codeception\Module
 	 *
 	 * @since   1.7.9
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   int              $subscriberID  Subscriber ID.
-	 * @param   int              $formID        Form ID.
-	 * @param   string           $referrer      Referrer.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   int            $subscriberID  Subscriber ID.
+	 * @param   int            $formID        Form ID.
+	 * @param   string         $referrer      Referrer.
 	 */
 	public function apiCheckSubscriberHasForm($I, $subscriberID, $formID, $referrer = false)
 	{
@@ -158,9 +158,9 @@ class ConvertKitAPI extends \Codeception\Module
 	 *
 	 * @since   1.7.2
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   int              $subscriberID  Subscriber ID.
-	 * @param   int              $sequenceID         Sequence ID.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   int            $subscriberID  Subscriber ID.
+	 * @param   int            $sequenceID         Sequence ID.
 	 */
 	public function apiCheckSubscriberHasSequence($I, $subscriberID, $sequenceID)
 	{
@@ -188,9 +188,9 @@ class ConvertKitAPI extends \Codeception\Module
 	 *
 	 * @since   1.4.0
 	 *
-	 * @param   AcceptanceTester $I             AcceptanceTester.
-	 * @param   int              $subscriberID  Subscriber ID.
-	 * @param   int              $tagID         Tag ID.
+	 * @param   EndToEndTester $I             Tester.
+	 * @param   int            $subscriberID  Subscriber ID.
+	 * @param   int            $tagID         Tag ID.
 	 */
 	public function apiCheckSubscriberHasTag($I, $subscriberID, $tagID)
 	{
@@ -214,8 +214,8 @@ class ConvertKitAPI extends \Codeception\Module
 	 *
 	 * @since   1.5.4
 	 *
-	 * @param   AcceptanceTester $I              AcceptanceTester.
-	 * @param   int              $subscriberID   Subscriber ID.
+	 * @param   EndToEndTester $I              Tester.
+	 * @param   int            $subscriberID   Subscriber ID.
 	 */
 	public function apiCheckSubscriberHasNoTags($I, $subscriberID)
 	{

@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\EndToEnd;
+
+use Tests\Support\EndToEndTester;
+
 /**
  * Tests that the Creator Network Recommendations settings work with a WPForms Form
  *
@@ -11,9 +16,9 @@ class RecommendationsCest
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _before(AcceptanceTester $I)
+	public function _before(EndToEndTester $I)
 	{
 		$I->activateConvertKitPlugin($I);
 		$I->activateThirdPartyPlugin($I, 'wpforms-lite');
@@ -25,9 +30,9 @@ class RecommendationsCest
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreatorNetworkRecommendationsOptionWhenNoCredentials(AcceptanceTester $I)
+	public function testCreatorNetworkRecommendationsOptionWhenNoCredentials(EndToEndTester $I)
 	{
 		// Create Form.
 		$wpFormsID = $I->createWPFormsForm($I);
@@ -36,7 +41,7 @@ class RecommendationsCest
 		$I->seeWPFormsSettingMessage(
 			$I,
 			$wpFormsID,
-			'Please connect your Kit account on the <a href="' . $_ENV['TEST_SITE_WP_URL'] . '/wp-admin/admin.php?page=wpforms-settings&amp;view=integrations" target="_blank">integrations screen</a>'
+			'Please connect your Kit account on the <a href="' . $_ENV['WORDPRESS_URL'] . '/wp-admin/admin.php?page=wpforms-settings&amp;view=integrations" target="_blank">integrations screen</a>'
 		);
 
 		// Create a Page with the WPForms shortcode as its content.
@@ -58,9 +63,9 @@ class RecommendationsCest
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreatorNetworkRecommendationsOptionWhenInvalidCredentials(AcceptanceTester $I)
+	public function testCreatorNetworkRecommendationsOptionWhenInvalidCredentials(EndToEndTester $I)
 	{
 		// Setup Plugin with invalid API Key and Secret.
 		$accountID = $I->setupWPFormsIntegration($I, 'fakeAccessToken', 'fakeRefreshToken');
@@ -91,9 +96,9 @@ class RecommendationsCest
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreatorNetworkRecommendationsOptionWhenDisabledOnConvertKitAccount(AcceptanceTester $I)
+	public function testCreatorNetworkRecommendationsOptionWhenDisabledOnConvertKitAccount(EndToEndTester $I)
 	{
 		// Setup Plugin with API Key and Secret for ConvertKit Account that does not have the Creator Network enabled.
 		$accountID = $I->setupWPFormsIntegration($I, $_ENV['CONVERTKIT_OAUTH_ACCESS_TOKEN_NO_DATA'], $_ENV['CONVERTKIT_OAUTH_REFRESH_TOKEN_NO_DATA'], $_ENV['CONVERTKIT_API_ACCOUNT_ID_NO_DATA']);
@@ -126,9 +131,9 @@ class RecommendationsCest
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreatorNetworkRecommendationsWithAJAXDisabled(AcceptanceTester $I)
+	public function testCreatorNetworkRecommendationsWithAJAXDisabled(EndToEndTester $I)
 	{
 		// Setup Plugin.
 		$accountID = $I->setupWPFormsIntegration($I);
@@ -163,9 +168,9 @@ class RecommendationsCest
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function testCreatorNetworkRecommendationsWithAJAXEnabled(AcceptanceTester $I)
+	public function testCreatorNetworkRecommendationsWithAJAXEnabled(EndToEndTester $I)
 	{
 		// Setup Plugin.
 		$accountID = $I->setupWPFormsIntegration($I);
@@ -224,9 +229,9 @@ class RecommendationsCest
 	 *
 	 * @since   1.5.8
 	 *
-	 * @param   AcceptanceTester $I  Tester.
+	 * @param   EndToEndTester $I  Tester.
 	 */
-	public function _passed(AcceptanceTester $I)
+	public function _passed(EndToEndTester $I)
 	{
 		$I->deactivateConvertKitPlugin($I);
 
