@@ -54,8 +54,6 @@ if ( ! class_exists( 'ConvertKit_Review_Request' ) ) {
  */
 function integrate_convertkit_wpforms() {
 
-	load_plugin_textdomain( 'integrate-convertkit-wpforms', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-
 	require_once plugin_dir_path( __FILE__ ) . '/includes/class-integrate-convertkit-wpforms-api.php';
 	require_once plugin_dir_path( __FILE__ ) . '/includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php';
 	require_once plugin_dir_path( __FILE__ ) . '/includes/class-integrate-convertkit-wpforms-resource.php';
