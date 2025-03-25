@@ -164,7 +164,8 @@ class Integrate_ConvertKit_WPForms_Setup {
 			);
 			$result = $api->get_access_token_by_api_key_and_secret(
 				$settings['api_key'],
-				$settings['api_secret']
+				$settings['api_secret'],
+				get_site_url()
 			);
 
 			// Bail if an error occured.
