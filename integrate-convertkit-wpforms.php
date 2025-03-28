@@ -9,7 +9,7 @@
  * Plugin Name: Kit (formerly ConvertKit) for WPForms
  * Plugin URI:  https://kit.com
  * Description: Create Kit signup forms using WPForms
- * Version:     1.8.0
+ * Version:     1.8.1
  * Author:      Kit
  * Author URI:  https://kit.com
  * Text Domain: integrate-convertkit-wpforms
@@ -28,7 +28,7 @@ define( 'INTEGRATE_CONVERTKIT_WPFORMS_NAME', 'ConvertKitWPForms' ); // Used for 
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_FILE', plugin_basename( __FILE__ ) );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_URL', plugin_dir_url( __FILE__ ) );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_PATH', __DIR__ );
-define( 'INTEGRATE_CONVERTKIT_WPFORMS_VERSION', '1.8.0' );
+define( 'INTEGRATE_CONVERTKIT_WPFORMS_VERSION', '1.8.1' );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_CLIENT_ID', '147qqKJeENYp5MqgL6AOShDDcLK3UQeClmcIV1ij3gI' );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_REDIRECT_URI', 'https://app.kit.com/wordpress/redirect' );
 
@@ -53,8 +53,6 @@ if ( ! class_exists( 'ConvertKit_Review_Request' ) ) {
  * Load the class
  */
 function integrate_convertkit_wpforms() {
-
-	load_plugin_textdomain( 'integrate-convertkit-wpforms', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 	require_once plugin_dir_path( __FILE__ ) . '/includes/class-integrate-convertkit-wpforms-api.php';
 	require_once plugin_dir_path( __FILE__ ) . '/includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php';

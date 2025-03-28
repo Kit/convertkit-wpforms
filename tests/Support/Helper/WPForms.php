@@ -570,8 +570,10 @@ class WPForms extends \Codeception\Module
 	 */
 	public function disconnectAccount($I, $accountID)
 	{
-		// Login as admin.
-		$I->loginAsAdmin();
+		// Login as the Administrator, if we're not already logged in.
+		if ( ! $I->amLoggedInAsAdmin($I) ) {
+			$I->doLoginAsAdmin($I);
+		}
 
 		// Click Disconnect.
 		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=integrations');

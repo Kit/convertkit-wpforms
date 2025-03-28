@@ -3,8 +3,8 @@ Contributors: nathanbarry, convertkit, billerickson
 Donate link: https://kit.com
 Tags: form, wpforms, convertkit, email, marketing
 Requires at least: 5.0
-Tested up to: 6.7.1
-Stable tag: 1.8.0
+Tested up to: 6.7.2
+Stable tag: 1.8.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -40,6 +40,11 @@ No. You must first have an account on kit.com, but you do not have to use a paid
 2. WPForms Kit Form Settings when editing a WPForms Form at Marketing > Kit
 
 == Changelog ==
+
+### 1.8.1 2025-03-25
+* Fix: Remove `load_plugin_textdomain` call, as it's not needed since WordPress 4.6
+* Fix: Issue client ID, site-specific v4 API Access and Refresh Token when upgrading from < 1.7.0
+* Updated: Use WordPress Libraries 2.0.7
 
 ### 1.8.0 2025-03-06
 * Fix: Save Creator Network settings when editing a WPForms Form in WPForms Lite 1.9.4.0+
