@@ -41,7 +41,7 @@ No. You must first have an account on kit.com, but you do not have to use a paid
 
 == Changelog ==
 
-### 1.8.2 2025-04-15
+### 1.8.2 2025-04-15
 * Updated: Use WordPress Libraries 2.0.8
 
 ### 1.8.1 2025-03-25
