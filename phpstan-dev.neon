@@ -1,0 +1,29 @@
+# PHPStan configuration for Dev Containers
+
+# Include PHPStan for WordPress configuration.
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+# Parameters
+parameters:
+    # Paths to scan
+    # This should comprise of the base Plugin PHP file, plus directories that contain Plugin PHP files
+    paths:
+        - integrate-convertkit-wpforms.php
+        - includes/
+
+    # Files that include Plugin-specific PHP constants
+    bootstrapFiles:
+        - integrate-convertkit-wpforms.php
+
+    # Location of WordPress Plugins for PHPStan to scan, building symbols.
+    scanDirectories:
+        - /wp/wp-content/plugins
+
+    # Location of constants, Kit helper functions and Kit WordPress Libraries for PHPStan to scan, building symbols.
+    scanFiles:
+        - /wp/wp-config.php
+
+    # Should not need to edit anything below here
+    # Rule Level: https://phpstan.org/user-guide/rule-levels
+    level: 5
