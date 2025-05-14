@@ -78,6 +78,78 @@ class FormCest
 	}
 
 	/**
+	 * Test that the connection can be added in the WPForms Form Builder,
+	 * if no connection exists at WPForms > Settings > Integrations.
+	 *
+	 * @since   1.8.4
+	 *
+	 * @param   EndToEndTester $I  Tester.
+	 */
+	public function testAddNewConnectionInFormBuilder(EndToEndTester $I)
+	{
+		// Create Form.
+		$wpFormsID = $I->createWPFormsForm($I);
+
+		// Click Marketing icon.
+		$I->waitForElementVisible('.wpforms-panel-providers-button');
+		$I->click('.wpforms-panel-providers-button');
+
+		// Click Kit tab.
+		$I->click('#wpforms-panel-providers a.wpforms-panel-sidebar-section-convertkit');
+
+		// Click Add New Connection.
+		$I->click('Add New Connection');
+
+		// Define name for connection.
+		$I->waitForElementVisible('.jconfirm-content');
+		$I->fillField('#provider-connection-name', 'Kit');
+		$I->click('OK');
+
+		// Wait for Connect to Kit button to display, as no connections exist at WPForms > Settings > Integrations.
+		$I->waitForElementVisible('a[data-provider="convertkit"]');
+
+		// Click the button and confirm the OAuth popup displays.
+		$I->click('a[data-provider="convertkit"]');
+
+		// Switch to next browser tab, as the link opens in a new tab.
+		$I->switchToNextTab();
+
+		// Confirm the Kit login screen loaded.
+		$I->waitForElementVisible('input[name="user[email]"]');
+
+		// Add the provider tokens programmatically, as if the user completed OAuth.
+		$accountID = $I->setupWPFormsIntegration($I);
+
+		// Close tab, which will trigger the form builder to save and reload, showing the new connection.
+		$I->closeTab();
+		$I->wait(3);
+
+		// Wait for save to complete.
+		$I->waitForElementVisible('#wpforms-save:not(:disabled)');
+
+		// Click Add New Connection.
+		$I->click('Add New Connection');
+
+		// Define name for connection.
+		$I->waitForElementVisible('.jconfirm-content');
+		$I->fillField('#provider-connection-name', 'Kit');
+		$I->click('OK');
+
+		// Get the connection ID to confirm the connection was added.
+		$I->waitForElementVisible('.wpforms-provider-connections .wpforms-provider-connection');
+		$connectionID = $I->grabAttributeFrom('.wpforms-provider-connections .wpforms-provider-connection', 'data-connection_id');
+
+		// Confirm the connection was added.
+		$I->waitForElementVisible('div[data-connection_id="' . $connectionID . '"] .wpforms-provider-fields', 30);
+
+		// Click Save.
+		$I->click('#wpforms-save');
+
+		// Wait for save to complete.
+		$I->waitForElementVisible('#wpforms-save:not(:disabled)');
+	}
+
+	/**
 	 * Tests that the connection configured when editing a WPForms Form at Marketing > Kit is retained when:
 	 * - Connects to Kit at Settings > Integrations,
 	 * - Configures the connection at WPForms Form > Marketing > Kit,
