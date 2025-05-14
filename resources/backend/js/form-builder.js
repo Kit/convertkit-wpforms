@@ -12,7 +12,7 @@
  *
  * @since 1.8.4
  */
-const IntegrateConvertKitWPFormsOauth = function () {
+const IntegrateConvertKitWPFormsOauth = (function () {
 
 	/**
 	 * Public functions and properties.
@@ -117,7 +117,7 @@ const IntegrateConvertKitWPFormsOauth = function () {
 
 	// Provide access to public functions/properties.
 	return app;
-};
+})();
 
 // Initialize.
 IntegrateConvertKitWPFormsOauth.init();
