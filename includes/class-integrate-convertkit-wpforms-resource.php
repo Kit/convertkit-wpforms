@@ -2,7 +2,7 @@
 /**
  * ConvertKit Resource class.
  *
- * @package CKWC
+ * @package ConvertKit_WPForms
  * @author ConvertKit
  */
 
