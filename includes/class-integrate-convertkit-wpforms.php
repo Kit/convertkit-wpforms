@@ -65,7 +65,8 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 			add_action( 'init', array( $this, 'maybe_display_notice' ) );
 			add_action( 'init', array( $this, 'maybe_get_and_store_access_token' ) );
 			add_action( "wp_ajax_wpforms_settings_provider_disconnect_{$this->slug}", array( $this, 'delete_resource_cache' ), 1 );
-			add_action( 'wpforms_settings_enqueue', array( $this, 'enqueue_assets' ) );
+			add_action( 'wpforms_settings_enqueue', array( $this, 'enqueue_settings_assets' ) );
+			add_action( 'wpforms_builder_enqueues', array( $this, 'enqueue_builder_assets' ) );
 			add_filter( "wpforms_providers_provider_settings_formbuilder_display_content_default_screen_{$this->slug}", array( $this, 'builder_settings_default_content' ) );
 		}
 
@@ -631,6 +632,41 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 	}
 
 	/**
+	 * Outputs a <select> dropdown of Kit Accounts, allowing the user
+	 * to choose which Kit Account to use for sending form submissions to.
+	 *
+	 * @since 1.8.4
+	 *
+	 * @param string $connection_id Unique connection ID.
+	 * @param array  $connection    Array of connection data.
+	 * @return string
+	 */
+	public function output_accounts( $connection_id = '', $connection = array() ) {
+
+		// Get all registered providers in WPForms.
+		$providers = wpforms_get_providers_options();
+
+		// Show a message if no Kit providers were registered, with a button linking to the OAuth flow.
+		if ( empty( $providers[ $this->slug ] ) ) {
+			// Initialize API to generate OAuth URL.
+			$api = new Integrate_ConvertKit_WPForms_API(
+				INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_CLIENT_ID,
+				INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_REDIRECT_URI
+			);
+
+			return sprintf(
+				'<div class="wpforms-connection-block"><a href="%s" class="wpforms-btn wpforms-btn-md wpforms-btn-orange" data-provider="convertkit" target="_blank" rel="noopener noreferrer">%s</a></div>',
+				esc_url( $api->get_oauth_url( admin_url( 'admin.php?page=wpforms-settings&view=integrations&convertkit-modal=1' ) ) ),
+				esc_html__( 'Connect to Kit', 'integrate-convertkit-wpforms' )
+			);
+		}
+
+		// Return the <select> dropdown of Kit Accounts.
+		return parent::output_accounts( $connection_id, $connection );
+
+	}
+
+	/**
 	 * Outputs a <select> dropdown of ConvertKit Forms, allowing the user
 	 * to choose which ConvertKit Form to send form submissions to.
 	 *
@@ -688,10 +724,21 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 	 *
 	 * @since   1.7.0
 	 */
-	public function enqueue_assets() {
+	public function enqueue_settings_assets() {
 
 		// Enqueue CSS.
-		wp_enqueue_style( 'ckwc-admin', INTEGRATE_CONVERTKIT_WPFORMS_URL . 'resources/backend/css/admin.css', array(), INTEGRATE_CONVERTKIT_WPFORMS_VERSION );
+		wp_enqueue_style( 'integrate-convertkit-wpforms-admin', INTEGRATE_CONVERTKIT_WPFORMS_URL . 'resources/backend/css/admin.css', array(), INTEGRATE_CONVERTKIT_WPFORMS_VERSION );
+
+	}
+
+	/**
+	 * Enqueue JS for the form builder.
+	 *
+	 * @since 1.8.4
+	 */
+	public function enqueue_builder_assets() {
+
+		wp_enqueue_script( 'integrate-convertkit-wpforms-builder', INTEGRATE_CONVERTKIT_WPFORMS_URL . 'resources/backend/js/form-builder.js', array(), INTEGRATE_CONVERTKIT_WPFORMS_VERSION, true );
 
 	}
 
@@ -806,6 +853,13 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 			),
 			'kit-' . $account['account']['id']
 		);
+
+		// If this request is served in a popup window (i.e. from the form builder),
+		// serve a view that will close the popup.
+		if ( array_key_exists( 'convertkit-modal', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			require INTEGRATE_CONVERTKIT_WPFORMS_PATH . '/views/backend/close-modal.php';
+			exit();
+		}
 
 		// Reload the integrations screen, which will now show the connection.
 		wp_safe_redirect(
