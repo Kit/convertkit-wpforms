@@ -58,8 +58,8 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress
+			pageID: $pageID,
+			emailAddress: $emailAddress
 		);
 
 		// Check API to confirm subscriber was sent.
@@ -71,9 +71,9 @@ class FormCest
 		// Check that the subscriber has the expected form and referrer value set.
 		$I->apiCheckSubscriberHasForm(
 			$I,
-			$subscriberID,
-			$_ENV['CONVERTKIT_API_FORM_ID'],
-			$_ENV['WORDPRESS_URL'] . $I->grabFromCurrentUrl()
+			subscriberID: $subscriberID,
+			formID: $_ENV['CONVERTKIT_API_FORM_ID'],
+			referrer: $_ENV['WORDPRESS_URL'] . $I->grabFromCurrentUrl()
 		);
 	}
 
@@ -206,12 +206,16 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress
+			pageID: $pageID,
+			emailAddress: $emailAddress
 		);
 
 		// Check API to confirm subscriber was sent.
-		$I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 	}
 
 	/**
@@ -238,15 +242,23 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress
+			pageID: $pageID,
+			emailAddress: $emailAddress
 		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 
 		// Check API to confirm subscriber has Tag set.
-		$I->apiCheckSubscriberHasTag($I, $subscriberID, $_ENV['CONVERTKIT_API_TAG_ID']);
+		$I->apiCheckSubscriberHasTag(
+			$I,
+			subscriberID: $subscriberID,
+			tagID: $_ENV['CONVERTKIT_API_TAG_ID']
+		);
 	}
 
 	/**
@@ -273,15 +285,23 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress
+			pageID: $pageID,
+			emailAddress: $emailAddress
 		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 
 		// Check API to confirm subscriber has Tag set.
-		$I->apiCheckSubscriberHasSequence($I, $subscriberID, $_ENV['CONVERTKIT_API_SEQUENCE_ID']);
+		$I->apiCheckSubscriberHasSequence(
+			$I,
+			subscriberID: $subscriberID,
+			sequenceID: $_ENV['CONVERTKIT_API_SEQUENCE_ID']
+		);
 	}
 
 	/**
@@ -308,12 +328,16 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress
+			pageID: $pageID,
+			emailAddress: $emailAddress
 		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 	}
 
 	/**
@@ -332,8 +356,8 @@ class FormCest
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
 			$I,
-			'Subscribe',
-			[
+			optionName: 'Subscribe',
+			tags: [
 				$_ENV['CONVERTKIT_API_TAG_ID'],
 			]
 		);
@@ -344,18 +368,26 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress,
-			[
+			pageID: $pageID,
+			emailAddress: $emailAddress,
+			tags: [
 				$_ENV['CONVERTKIT_API_TAG_ID'],
 			]
 		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 
 		// Check API to confirm subscriber has Tag set.
-		$I->apiCheckSubscriberHasTag($I, $subscriberID, $_ENV['CONVERTKIT_API_TAG_ID']);
+		$I->apiCheckSubscriberHasTag(
+			$I,
+			subscriberID: $subscriberID,
+			tagID: $_ENV['CONVERTKIT_API_TAG_ID']
+		);
 	}
 
 	/**
@@ -374,8 +406,8 @@ class FormCest
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
 			$I,
-			'Subscribe',
-			[
+			optionName: 'Subscribe',
+			tags: [
 				'1111', // A fake Tag ID.
 			]
 		);
@@ -386,15 +418,19 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress,
-			[
+			pageID: $pageID,
+			emailAddress: $emailAddress,
+			tags: [
 				'1111',
 			]
 		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 
 		// Confirm no tags were added to the subscriber, as the submitted tag doesn't exist in ConvertKit.
 		$I->apiCheckSubscriberHasNoTags($I, $subscriberID);
@@ -416,8 +452,8 @@ class FormCest
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
 			$I,
-			'Subscribe',
-			[
+			optionName: 'Subscribe',
+			tags: [
 				$_ENV['CONVERTKIT_API_TAG_ID'],
 				$_ENV['CONVERTKIT_API_TAG_ID_2'],
 			]
@@ -429,20 +465,32 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress,
-			[
+			pageID: $pageID,
+			emailAddress: $emailAddress,
+			tags: [
 				$_ENV['CONVERTKIT_API_TAG_ID'],
 				$_ENV['CONVERTKIT_API_TAG_ID_2'],
 			]
 		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 
 		// Check API to confirm subscriber has Tags set.
-		$I->apiCheckSubscriberHasTag($I, $subscriberID, $_ENV['CONVERTKIT_API_TAG_ID']);
-		$I->apiCheckSubscriberHasTag($I, $subscriberID, $_ENV['CONVERTKIT_API_TAG_ID_2']);
+		$I->apiCheckSubscriberHasTag(
+			$I,
+			subscriberID: $subscriberID,
+			tagID: $_ENV['CONVERTKIT_API_TAG_ID']
+		);
+		$I->apiCheckSubscriberHasTag(
+			$I,
+			subscriberID: $subscriberID,
+			tagID: $_ENV['CONVERTKIT_API_TAG_ID_2']
+		);
 	}
 
 	/**
@@ -461,8 +509,8 @@ class FormCest
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
 			$I,
-			'Subscribe',
-			[
+			optionName: 'Subscribe',
+			tags: [
 				$_ENV['CONVERTKIT_API_TAG_NAME'],
 			]
 		);
@@ -473,18 +521,26 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress,
-			[
+			pageID: $pageID,
+			emailAddress: $emailAddress,
+			tags: [
 				$_ENV['CONVERTKIT_API_TAG_NAME'],
 			]
 		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 
 		// Check API to confirm subscriber has Tag set.
-		$I->apiCheckSubscriberHasTag($I, $subscriberID, $_ENV['CONVERTKIT_API_TAG_ID']);
+		$I->apiCheckSubscriberHasTag(
+			$I,
+			subscriberID: $subscriberID,
+			tagID: $_ENV['CONVERTKIT_API_TAG_ID']
+		);
 	}
 
 	/**
@@ -503,8 +559,8 @@ class FormCest
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
 			$I,
-			'Subscribe',
-			[
+			optionName: 'Subscribe',
+			tags: [
 				'fake-tag-name', // A fake Tag Name.
 			]
 		);
@@ -515,18 +571,26 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress,
-			[
+			pageID: $pageID,
+			emailAddress: $emailAddress,
+			tags: [
 				'fake-tag-name', // A fake Tag Name.
 			]
 		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 
 		// Confirm no tags were added to the subscriber, as the submitted tag doesn't exist in ConvertKit.
 		$I->apiCheckSubscriberHasNoTags($I, $subscriberID);
@@ -548,8 +612,8 @@ class FormCest
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
 			$I,
-			'Subscribe',
-			[
+			optionName: 'Subscribe',
+			tags: [
 				$_ENV['CONVERTKIT_API_TAG_NAME'],
 				$_ENV['CONVERTKIT_API_TAG_NAME_2'],
 			]
@@ -561,20 +625,32 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress,
-			[
+			pageID: $pageID,
+			emailAddress: $emailAddress,
+			tags: [
 				$_ENV['CONVERTKIT_API_TAG_NAME'],
 				$_ENV['CONVERTKIT_API_TAG_NAME_2'],
 			]
 		);
 
 		// Check API to confirm subscriber was sent.
-		$subscriberID = $I->apiCheckSubscriberExists($I, $emailAddress, 'First');
+		$subscriberID = $I->apiCheckSubscriberExists(
+			$I,
+			emailAddress: $emailAddress,
+			firstName: 'First'
+		);
 
 		// Check API to confirm subscriber has Tags set.
-		$I->apiCheckSubscriberHasTag($I, $subscriberID, $_ENV['CONVERTKIT_API_TAG_ID']);
-		$I->apiCheckSubscriberHasTag($I, $subscriberID, $_ENV['CONVERTKIT_API_TAG_ID_2']);
+		$I->apiCheckSubscriberHasTag(
+			$I,
+			subscriberID: $subscriberID,
+			tagID: $_ENV['CONVERTKIT_API_TAG_ID']
+		);
+		$I->apiCheckSubscriberHasTag(
+			$I,
+			subscriberID: $subscriberID,
+			tagID: $_ENV['CONVERTKIT_API_TAG_ID_2']
+		);
 	}
 
 	/**
@@ -593,9 +669,8 @@ class FormCest
 		// Setup WPForms Form and configuration for this test.
 		$pageID = $this->_wpFormsSetupForm(
 			$I,
-			'Subscribe',
-			false,
-			[  // Custom Fields.
+			optionName: 'Subscribe',
+			customFields: [  // Custom Fields.
 				$_ENV['CONVERTKIT_API_CUSTOM_FIELD_NAME'] => 'Comment or Message', // ConvertKit Custom Field --> WPForms Field Name mapping.
 			]
 		);
@@ -606,18 +681,17 @@ class FormCest
 		// Complete and submit WPForms Form.
 		$this->_wpFormsCompleteAndSubmitForm(
 			$I,
-			$pageID,
-			$emailAddress,
-			false,
-			'Notes'
+			pageID: $pageID,
+			emailAddress: $emailAddress,
+			customField: 'Notes'
 		);
 
 		// Check API to confirm subscriber was sent and data mapped to fields correctly.
 		$I->apiCheckSubscriberExists(
 			$I,
-			$emailAddress,
-			'First',
-			[
+			emailAddress: $emailAddress,
+			firstName: 'First',
+			customFields: [
 				$_ENV['CONVERTKIT_API_CUSTOM_FIELD_NAME'] => 'Notes',
 			]
 		);
@@ -670,12 +744,12 @@ class FormCest
 		// Configure ConvertKit on Form.
 		$I->configureConvertKitSettingsOnForm(
 			$I,
-			$wpFormsID,
-			$optionName,
-			'Name (First)',
-			'Email',
-			( $customFields ? $customFields : false ),
-			( $tags ? 'Tag ID' : false ) // Name of Tag Field in WPForms.
+			wpFormID: $wpFormsID,
+			formName: $optionName,
+			nameField: 'Name (First)',
+			emailField: 'Email',
+			customFields: $customFields,
+			tagField: $tags, // Name of Tag Field in WPForms.
 		);
 
 		// Check that the resources are cached with the correct key.
