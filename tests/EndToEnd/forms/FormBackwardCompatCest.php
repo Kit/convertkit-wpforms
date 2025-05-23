@@ -48,18 +48,17 @@ class FormBackwardCompatCest
 		// Configure ConvertKit API on Form.
 		$I->configureConvertKitSettingsOnForm(
 			$I,
-			$wpFormsID,
-			$_ENV['CONVERTKIT_API_FORM_NAME'],
-			'Name (First)',
-			'Email'
+			wpFormID: $wpFormsID,
+			formName: $_ENV['CONVERTKIT_API_FORM_NAME'],
+			nameField: 'Name (First)',
+			emailField: 'Email'
 		);
 
 		// Add `ck-tag` CSS class on Tag Field.
 		$I->configureWPFormsBackwardCompatClasses(
 			$I,
-			$wpFormsID,
-			false,
-			true
+			wpFormID: $wpFormsID,
+			tagField: true
 		);
 
 		// Create a Page with the WPForms shortcode as its content.
@@ -125,18 +124,17 @@ class FormBackwardCompatCest
 		// Configure ConvertKit API on Form.
 		$I->configureConvertKitSettingsOnForm(
 			$I,
-			$wpFormsID,
-			$_ENV['CONVERTKIT_API_FORM_NAME'],
-			'Name (First)',
-			'Email'
+			wpFormID: $wpFormsID,
+			formName: $_ENV['CONVERTKIT_API_FORM_NAME'],
+			nameField: 'Name (First)',
+			emailField: 'Email'
 		);
 
 		// Add `ck-tag` CSS class on Tag Field.
 		$I->configureWPFormsBackwardCompatClasses(
 			$I,
-			$wpFormsID,
-			false,
-			true
+			wpFormID: $wpFormsID,
+			tagField: true
 		);
 
 		// Create a Page with the WPForms shortcode as its content.
@@ -199,17 +197,17 @@ class FormBackwardCompatCest
 		// Configure ConvertKit API on Form.
 		$I->configureConvertKitSettingsOnForm(
 			$I,
-			$wpFormsID,
-			$_ENV['CONVERTKIT_API_FORM_NAME'],
-			'Name (First)',
-			'Email'
+			wpFormID: $wpFormsID,
+			formName: $_ENV['CONVERTKIT_API_FORM_NAME'],
+			nameField: 'Name (First)',
+			emailField: 'Email'
 		);
 
 		// Add `ck-custom-{name}` CSS class on Field.
 		$I->configureWPFormsBackwardCompatClasses(
 			$I,
-			$wpFormsID,
-			$_ENV['CONVERTKIT_API_CUSTOM_FIELD_NAME']
+			wpFormID: $wpFormsID,
+			customField: $_ENV['CONVERTKIT_API_CUSTOM_FIELD_NAME']
 		);
 
 		// Create a Page with the WPForms shortcode as its content.
@@ -275,17 +273,17 @@ class FormBackwardCompatCest
 		// Configure ConvertKit API on Form.
 		$I->configureConvertKitSettingsOnForm(
 			$I,
-			$wpFormsID,
-			$_ENV['CONVERTKIT_API_FORM_NAME'],
-			'Name (First)',
-			'Email'
+			wpFormID: $wpFormsID,
+			formName: $_ENV['CONVERTKIT_API_FORM_NAME'],
+			nameField: 'Name (First)',
+			emailField: 'Email'
 		);
 
 		// Add `ck-custom-{name}` CSS class on Field.
 		$I->configureWPFormsBackwardCompatClasses(
 			$I,
-			$wpFormsID,
-			'fakeCustomFieldName'
+			wpFormID: $wpFormsID,
+			customField: 'fakeCustomFieldName'
 		);
 
 		// Create a Page with the WPForms shortcode as its content.

@@ -40,8 +40,8 @@ class RecommendationsCest
 		// Confirm that the Form Settings display the expected error message.
 		$I->seeWPFormsSettingMessage(
 			$I,
-			$wpFormsID,
-			'Please connect your Kit account on the <a href="' . $_ENV['WORDPRESS_URL'] . '/wp-admin/admin.php?page=wpforms-settings&amp;view=integrations" target="_blank">integrations screen</a>'
+			wpFormID: $wpFormsID,
+			message: 'Please connect your Kit account on the <a href="' . $_ENV['WORDPRESS_URL'] . '/wp-admin/admin.php?page=wpforms-settings&amp;view=integrations" target="_blank">integrations screen</a>'
 		);
 
 		// Create a Page with the WPForms shortcode as its content.
@@ -68,13 +68,21 @@ class RecommendationsCest
 	public function testCreatorNetworkRecommendationsOptionWhenInvalidCredentials(EndToEndTester $I)
 	{
 		// Setup Plugin with invalid API Key and Secret.
-		$accountID = $I->setupWPFormsIntegration($I, 'fakeAccessToken', 'fakeRefreshToken');
+		$accountID = $I->setupWPFormsIntegration(
+			$I,
+			accessToken: 'fakeAccessToken',
+			refreshToken: 'fakeRefreshToken'
+		);
 
 		// Create Form.
 		$wpFormsID = $I->createWPFormsForm($I);
 
 		// Enable Creator Network Recommendations on the form's settings using the account specified.
-		$I->enableWPFormsSettingCreatorNetworkRecommendations($I, $wpFormsID, $accountID);
+		$I->enableWPFormsSettingCreatorNetworkRecommendations(
+			$I,
+			wpFormID: $wpFormsID,
+			accountID: $accountID
+		);
 
 		// Create a Page with the WPForms shortcode as its content.
 		$pageID = $I->createPageWithWPFormsShortcode($I, $wpFormsID);
@@ -101,7 +109,12 @@ class RecommendationsCest
 	public function testCreatorNetworkRecommendationsOptionWhenDisabledOnConvertKitAccount(EndToEndTester $I)
 	{
 		// Setup Plugin with API Key and Secret for ConvertKit Account that does not have the Creator Network enabled.
-		$accountID = $I->setupWPFormsIntegration($I, $_ENV['CONVERTKIT_OAUTH_ACCESS_TOKEN_NO_DATA'], $_ENV['CONVERTKIT_OAUTH_REFRESH_TOKEN_NO_DATA'], $_ENV['CONVERTKIT_API_ACCOUNT_ID_NO_DATA']);
+		$accountID = $I->setupWPFormsIntegration(
+			$I,
+			accessToken: $_ENV['CONVERTKIT_OAUTH_ACCESS_TOKEN_NO_DATA'],
+			refreshToken: $_ENV['CONVERTKIT_OAUTH_REFRESH_TOKEN_NO_DATA'],
+			accountID: $_ENV['CONVERTKIT_API_ACCOUNT_ID_NO_DATA']
+		);
 
 		// Create Form.
 		$wpFormsID = $I->createWPFormsForm($I);
@@ -142,7 +155,11 @@ class RecommendationsCest
 		$wpFormsID = $I->createWPFormsForm($I);
 
 		// Enable Creator Network Recommendations on the form's settings.
-		$I->enableWPFormsSettingCreatorNetworkRecommendations($I, $wpFormsID, $accountID);
+		$I->enableWPFormsSettingCreatorNetworkRecommendations(
+			$I,
+			wpFormID: $wpFormsID,
+			accountID: $accountID
+		);
 
 		// Disable AJAX.
 		$I->disableAJAXFormSubmissionSetting($I, $wpFormsID);
@@ -179,7 +196,11 @@ class RecommendationsCest
 		$wpFormsID = $I->createWPFormsForm($I);
 
 		// Enable Creator Network Recommendations on the form's settings.
-		$I->enableWPFormsSettingCreatorNetworkRecommendations($I, $wpFormsID, $accountID);
+		$I->enableWPFormsSettingCreatorNetworkRecommendations(
+			$I,
+			wpFormID: $wpFormsID,
+			accountID: $accountID
+		);
 
 		// Create a Page with the WPForms shortcode as its content.
 		$pageID = $I->createPageWithWPFormsShortcode($I, $wpFormsID);
