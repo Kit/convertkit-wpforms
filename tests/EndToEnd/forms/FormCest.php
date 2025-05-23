@@ -748,8 +748,8 @@ class FormCest
 			formName: $optionName,
 			nameField: 'Name (First)',
 			emailField: 'Email',
-			customFields: $customFields,
-			tagField: $tags, // Name of Tag Field in WPForms.
+			customFields: ( $customFields ? $customFields : false ),
+			tagField: ( $tags ? 'Tag ID' : false ) // Name of Tag Field in WPForms.
 		);
 
 		// Check that the resources are cached with the correct key.
