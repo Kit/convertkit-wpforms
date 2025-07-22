@@ -16,7 +16,7 @@
  * @param   string $client_id               OAuth Client ID used for the Access and Refresh Tokens.
  * @param   string $previous_access_token   Existing (expired) Access Token.
  */
-function integrate_convertkit_wpforms_update_credentials( $result, $client_id, $previous_access_token ) {
+function integrate_convertkit_wpforms_update_credentials( $result, $client_id, $previous_access_token = '' ) {
 
 	// Don't save these credentials if they're not for this Client ID.
 	// They're for another ConvertKit Plugin that uses OAuth.
@@ -47,7 +47,7 @@ function integrate_convertkit_wpforms_update_credentials( $result, $client_id, $
 				'refresh_token' => sanitize_text_field( $result['refresh_token'] ),
 				'token_expires' => ( time() + $result['expires_in'] ),
 				'label'         => $settings['label'],
-				'date'          => $settings['date'],
+				'date'          => time(),
 			),
 			$id
 		);
@@ -76,5 +76,4 @@ function integrate_convertkit_wpforms_update_credentials( $result, $client_id, $
 }
 
 // Update Access Token when refreshed by the API class.
-add_action( 'convertkit_api_get_access_token', 'integrate_convertkit_wpforms_update_credentials', 10, 3 );
 add_action( 'convertkit_api_refresh_token', 'integrate_convertkit_wpforms_update_credentials', 10, 3 );

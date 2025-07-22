@@ -79,8 +79,8 @@ class APITest extends WPTestCase
 		wpforms_update_providers_options(
 			'convertkit',
 			array(
-				'access_token'  => '',
-				'refresh_token' => '',
+				'access_token'  => $_ENV['CONVERTKIT_OAUTH_ACCESS_TOKEN'],
+				'refresh_token' => $_ENV['CONVERTKIT_OAUTH_REFRESH_TOKEN'],
 				'token_expires' => time(),
 				'label'         => 'ConvertKit WordPress',
 				'date'          => time(),
