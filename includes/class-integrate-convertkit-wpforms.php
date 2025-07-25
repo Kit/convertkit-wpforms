@@ -847,11 +847,28 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 			array(
 				'access_token'  => sanitize_text_field( $result['access_token'] ),
 				'refresh_token' => sanitize_text_field( $result['refresh_token'] ),
-				'token_expires' => ( $result['created_at'] + $result['expires_in'] ),
+				'token_expires' => ( time() + $result['expires_in'] ),
 				'label'         => $account['account']['name'],
 				'date'          => time(),
 			),
 			'kit-' . $account['account']['id']
+		);
+
+		// Clear any existing scheduled WordPress Cron event for this connection.
+		wp_clear_scheduled_hook(
+			'integrate_convertkit_wpforms_refresh_token',
+			array(
+				'kit-' . $account['account']['id'],
+			)
+		);
+
+		// Schedule a WordPress Cron event to refresh the token on expiry for this connection.
+		wp_schedule_single_event(
+			( time() + $result['expires_in'] ),
+			'integrate_convertkit_wpforms_refresh_token',
+			array(
+				'kit-' . $account['account']['id'],
+			)
 		);
 
 		// If this request is served in a popup window (i.e. from the form builder),
