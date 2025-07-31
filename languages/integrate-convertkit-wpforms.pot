@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.8.4\n"
+"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.8.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/convertkit-wpforms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-15T02:40:23+00:00\n"
+"POT-Creation-Date: 2025-07-31T02:57:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: integrate-convertkit-wpforms\n"
@@ -242,29 +242,29 @@ msgstr ""
 msgid "Kit: "
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:931
+#: includes/class-integrate-convertkit-wpforms.php:948
 msgid "Kit: Email"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:937
+#: includes/class-integrate-convertkit-wpforms.php:954
 msgid "Kit: First Name"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:942
+#: includes/class-integrate-convertkit-wpforms.php:959
 msgid "Kit: Tag"
 msgstr ""
 
 #. translators: ConvertKit Custom Field label
-#: includes/class-integrate-convertkit-wpforms.php:970
+#: includes/class-integrate-convertkit-wpforms.php:987
 msgid "Kit: Custom Field: %s"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:1005
+#: includes/class-integrate-convertkit-wpforms.php:1022
 msgid "No Kit connections exist."
 msgstr ""
 
 #. translators: WPForms ConvertKit Account ID
-#: includes/class-integrate-convertkit-wpforms.php:1013
+#: includes/class-integrate-convertkit-wpforms.php:1030
 msgid "The Kit connection with ID %s was unregistered."
 msgstr ""
 
