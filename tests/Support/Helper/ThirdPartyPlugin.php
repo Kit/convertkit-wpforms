@@ -32,7 +32,9 @@ class ThirdPartyPlugin extends \Codeception\Module
 		$I->waitForElementVisible('body.plugins-php');
 
 		// Activate the Plugin.
-		$I->activatePlugin($name);
+		$I->checkOption('//*[@data-slug="' . $name . '"]/th/input');
+		$I->selectOption('action', 'activate-selected');
+		$I->click('#doaction');
 
 		// Wait for the Plugins page to load with the Plugin activated, to confirm it activated.
 		$I->waitForElementVisible('table.plugins tr[data-slug=' . $name . '].active');
@@ -64,7 +66,9 @@ class ThirdPartyPlugin extends \Codeception\Module
 		$I->waitForElementVisible('body.plugins-php');
 
 		// Deactivate the Plugin.
-		$I->deactivatePlugin($name);
+		$I->checkOption('//*[@data-slug="' . $name . '"]/th/input');
+		$I->selectOption('action', 'deactivate-selected');
+		$I->click('#doaction');
 	}
 
 	/**

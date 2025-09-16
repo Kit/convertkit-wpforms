@@ -412,7 +412,7 @@ class WPForms extends \Codeception\Module
 			);
 			$I->assertEquals(
 				$I->grabTextFrom('.wpforms-provider-fields table tbody tr:last-child td:first-child'), // Last Custom Field.
-				'Kit: Custom Field: Test'
+				'Kit: Custom Field: URL'
 			);
 
 			foreach ($customFields as $customField => $customFieldValue) {
