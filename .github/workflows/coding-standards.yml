@@ -118,7 +118,7 @@ jobs:
         run: php vendor/bin/phpcs -q --standard=phpcs.tests.xml --report=checkstyle ./tests | cs2pr
 
       # Run WordPress Coding Standards on Plugin.
-      - name: Run WordPress Coding Standards
+      - name: Run WordPress PHP Coding Standards
         working-directory: ${{ env.PLUGIN_DIR }}
         run: php vendor/bin/phpcs -q --standard=phpcs.xml --report=checkstyle ./ | cs2pr
 
