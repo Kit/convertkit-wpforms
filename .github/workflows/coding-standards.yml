@@ -122,6 +122,11 @@ jobs:
         working-directory: ${{ env.PLUGIN_DIR }}
         run: php vendor/bin/phpcs -q --standard=phpcs.xml --report=checkstyle ./ | cs2pr
 
+      # Run CSS Coding Standards on Plugin.
+      - name: Run WordPress CSS Coding Standards
+        working-directory: ${{ env.PLUGIN_DIR }}
+        run: npm run lint:css
+
       # Run PHPStan for static analysis.
       - name: Run PHPStan Static Analysis
         working-directory: ${{ env.PLUGIN_DIR }}
