@@ -2,16 +2,16 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.8.5\n"
+"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.8.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/convertkit-wpforms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-31T02:57:54+00:00\n"
+"POT-Creation-Date: 2025-09-29T02:52:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: integrate-convertkit-wpforms\n"
 
 #. Plugin Name of the plugin
@@ -67,6 +67,7 @@ msgstr ""
 
 #. translators: Email Address
 #: includes/class-integrate-convertkit-wpforms-api.php:78
+#, php-format
 msgid "get_subscriber_by_email(): No subscriber(s) exist in Kit matching the email address %s."
 msgstr ""
 
@@ -140,6 +141,7 @@ msgstr ""
 
 #. translators: HTTP method
 #: includes/class-integrate-convertkit-wpforms-api.php:107
+#, php-format
 msgid "API request method %s is not supported in ConvertKit_API class."
 msgstr ""
 
@@ -221,6 +223,7 @@ msgstr ""
 
 #. translators: Resource type
 #: includes/class-integrate-convertkit-wpforms.php:409
+#, php-format
 msgid "The resource type %s is unsupported."
 msgstr ""
 
@@ -256,6 +259,7 @@ msgstr ""
 
 #. translators: ConvertKit Custom Field label
 #: includes/class-integrate-convertkit-wpforms.php:987
+#, php-format
 msgid "Kit: Custom Field: %s"
 msgstr ""
 
@@ -265,6 +269,7 @@ msgstr ""
 
 #. translators: WPForms ConvertKit Account ID
 #: includes/class-integrate-convertkit-wpforms.php:1030
+#, php-format
 msgid "The Kit connection with ID %s was unregistered."
 msgstr ""
 
@@ -324,6 +329,7 @@ msgstr ""
 #. translators: %1$s: Link to Kit Account
 #: views/backend/settings-form-marketing.php:22
 #: views/backend/settings-form-marketing.php:39
+#, php-format
 msgid "%1$s Required for proper plugin function."
 msgstr ""
 
