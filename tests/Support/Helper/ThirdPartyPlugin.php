@@ -36,11 +36,6 @@ class ThirdPartyPlugin extends \Codeception\Module
 		$I->selectOption('action', 'activate-selected');
 		$I->click('#doaction');
 
-		$I->wait(2);
-
-		// Go to the Plugins screen again.
-		$I->amOnPluginsPage();
-
 		// Wait for the Plugins page to load with the Plugin activated, to confirm it activated.
 		$I->waitForElementVisible('table.plugins tr[data-slug=' . $name . '].active');
 
@@ -70,19 +65,13 @@ class ThirdPartyPlugin extends \Codeception\Module
 		// Wait for the Plugins page to load.
 		$I->waitForElementVisible('body.plugins-php');
 
-		// Depending on the Plugin name, perform deactivation.
-		switch ($name) {
-			case 'wpforms-lite':
-				$I->click('a#deactivate-' . $name);
-				break;
+		// Deactivate the Plugin.
+		$I->checkOption('//*[@data-slug="' . $name . '"]/th/input');
+		$I->selectOption('action', 'deactivate-selected');
+		$I->click('#doaction');
 
-			default:
-				// Deactivate the Plugin.
-				$I->checkOption('//*[@data-slug="' . $name . '"]/th/input');
-				$I->selectOption('action', 'deactivate-selected');
-				$I->click('#doaction');
-				break;
-		}
+		// Wait for the Plugins page to load with the Plugin deactivated, to confirm it deactivated.
+		$I->waitForElementVisible('table.plugins tr[data-slug=' . $name . '].inactive');
 	}
 
 	/**
