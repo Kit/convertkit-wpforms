@@ -36,6 +36,8 @@ class ThirdPartyPlugin extends \Codeception\Module
 		$I->selectOption('action', 'activate-selected');
 		$I->click('#doaction');
 
+		$I->wait(2);
+
 		// Go to the Plugins screen again.
 		$I->amOnPluginsPage();
 
