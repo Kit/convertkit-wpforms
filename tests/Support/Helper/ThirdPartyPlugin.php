@@ -77,11 +77,11 @@ class ThirdPartyPlugin extends \Codeception\Module
 				$I->checkOption('//*[@data-slug="' . $name . '"]/th/input');
 				$I->selectOption('action', 'deactivate-selected');
 				$I->click('#doaction');
+
+				// Wait for the Plugins page to load with the Plugin deactivated, to confirm it deactivated.
+				$I->waitForElementVisible('table.plugins tr[data-slug=' . $name . '].inactive');
 				break;
 		}
-
-		// Wait for the Plugins page to load with the Plugin deactivated, to confirm it deactivated.
-		$I->waitForElementVisible('table.plugins tr[data-slug=' . $name . '].inactive');
 	}
 
 	/**
