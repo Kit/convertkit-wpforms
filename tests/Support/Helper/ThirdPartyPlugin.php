@@ -65,23 +65,13 @@ class ThirdPartyPlugin extends \Codeception\Module
 		// Wait for the Plugins page to load.
 		$I->waitForElementVisible('body.plugins-php');
 
-		// Depending on the Plugin name, perform deactivation.
-		switch ($name) {
-			case 'wpforms-lite':
-				// Using the check option results in a 502 Bad Gateway error.
-				$I->click('a#deactivate-' . $name);
-				break;
+		// Deactivate the Plugin.
+		$I->checkOption('//*[@data-slug="' . $name . '"]/th/input');
+		$I->selectOption('action', 'deactivate-selected');
+		$I->click('#doaction');
 
-			default:
-				// Deactivate the Plugin.
-				$I->checkOption('//*[@data-slug="' . $name . '"]/th/input');
-				$I->selectOption('action', 'deactivate-selected');
-				$I->click('#doaction');
-
-				// Wait for the Plugins page to load with the Plugin deactivated, to confirm it deactivated.
-				$I->waitForElementVisible('table.plugins tr[data-slug=' . $name . '].inactive');
-				break;
-		}
+		// Wait for the Plugins page to load with the Plugin deactivated, to confirm it deactivated.
+		$I->waitForElementVisible('table.plugins tr[data-slug=' . $name . '].inactive');
 	}
 
 	/**
