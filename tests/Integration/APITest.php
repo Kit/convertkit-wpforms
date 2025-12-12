@@ -111,6 +111,56 @@ class APITest extends WPTestCase
 	}
 
 	/**
+	 * Test that the Access Token, Refresh Token and Token Expiry are deleted from the Plugin's settings
+	 * when the Access Token used is invalid.
+	 *
+	 * @since   1.8.9
+	 */
+	public function testAccessTokenDeletedWhenInvalid()
+	{
+		// Save an invalid access token and refresh token in the Plugin's settings.
+		wpforms_update_providers_options(
+			'convertkit',
+			array(
+				'access_token'  => 'invalidAccessToken',
+				'refresh_token' => $_ENV['CONVERTKIT_OAUTH_REFRESH_TOKEN'],
+				'token_expires' => time() + 10000,
+				'label'         => 'ConvertKit WordPress',
+				'date'          => time(),
+			),
+			'wpunittest1234'
+		);
+
+		// Confirm the tokens saved.
+		$providers = wpforms_get_providers_options();
+		$account   = reset( $providers['convertkit'] );
+		$this->assertEquals( $account['access_token'], 'invalidAccessToken' );
+		$this->assertEquals( $account['refresh_token'], $_ENV['CONVERTKIT_OAUTH_REFRESH_TOKEN'] );
+
+		// Initialize the API using the invalid access token.
+		$api = new \Integrate_ConvertKit_WPForms_API(
+			$_ENV['CONVERTKIT_OAUTH_CLIENT_ID'],
+			$_ENV['KIT_OAUTH_REDIRECT_URI'],
+			$account['access_token'],
+			$account['refresh_token']
+		);
+
+		// Run request.
+		$result = $api->get_account();
+
+		// Confirm a WP_Error is returned.
+		$this->assertInstanceOf( 'WP_Error', $result );
+		$this->assertEquals( $result->get_error_code(), 'convertkit_api_error' );
+		$this->assertEquals( $result->get_error_message(), 'The access token is invalid' );
+
+		// Confirm tokens removed from the Plugin's settings, which confirms the `convertkit_api_access_token_invalid` hook was called when the tokens were deleted.
+		$providers = wpforms_get_providers_options();
+		$account   = reset( $providers['convertkit'] );
+		$this->assertEmpty( $account['access_token'] );
+		$this->assertEmpty( $account['refresh_token'] );
+	}
+
+	/**
 	 * Test that a WordPress Cron event is created when an access token is obtained.
 	 *
 	 * @since   1.8.5
