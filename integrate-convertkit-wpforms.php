@@ -50,6 +50,7 @@ if ( ! class_exists( 'ConvertKit_Review_Request' ) ) {
 }
 
 // Load required functions.
+require_once INTEGRATE_CONVERTKIT_WPFORMS_PATH . '/includes/class-integrate-convertkit-wpforms-admin-notices.php';
 require_once INTEGRATE_CONVERTKIT_WPFORMS_PATH . '/includes/functions.php';
 require_once INTEGRATE_CONVERTKIT_WPFORMS_PATH . '/includes/cron-functions.php';
 

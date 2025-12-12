@@ -30,6 +30,13 @@ class Integrate_ConvertKit_WPForms_API extends ConvertKit_API_V4 {
 	public $error_messages = false;
 
 	/**
+	 * Access Token
+	 *
+	 * @var string
+	 */
+	public $access_token = '';
+
+	/**
 	 * Sets up the API with the required credentials.
 	 *
 	 * @since   1.4.1
