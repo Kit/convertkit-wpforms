@@ -15,6 +15,13 @@
 class Integrate_ConvertKit_WPForms_Resource extends ConvertKit_Resource_V4 {
 
 	/**
+	 * The API class
+	 *
+	 * @var     bool|Integrate_ConvertKit_WPForms_API
+	 */
+	public $api = false;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since   1.7.0
@@ -57,7 +64,7 @@ class Integrate_ConvertKit_WPForms_Resource extends ConvertKit_Resource_V4 {
 		// If an error occured, maybe delete credentials from the Plugin's settings
 		// if the error is a 401 unauthorized.
 		if ( is_wp_error( $result ) ) {
-			integrate_convertkit_wpforms_maybe_delete_credentials( $result, INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_CLIENT_ID, $this->api->access_token );
+			integrate_convertkit_wpforms_maybe_delete_credentials( $result, INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_CLIENT_ID, $this->api->access_token() );
 		}
 
 		return $result;

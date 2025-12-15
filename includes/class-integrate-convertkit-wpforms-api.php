@@ -30,13 +30,6 @@ class Integrate_ConvertKit_WPForms_API extends ConvertKit_API_V4 {
 	public $error_messages = false;
 
 	/**
-	 * Access Token
-	 *
-	 * @var string
-	 */
-	public $access_token = '';
-
-	/**
 	 * Sets up the API with the required credentials.
 	 *
 	 * @since   1.4.1
@@ -117,6 +110,19 @@ class Integrate_ConvertKit_WPForms_API extends ConvertKit_API_V4 {
 			'request_bad_gateway'                          => __( 'Kit API Error: Bad gateway.', 'integrate-convertkit-wpforms' ),
 			'response_type_unexpected'                     => __( 'Kit API Error: The response is not of the expected type array.', 'integrate-convertkit-wpforms' ),
 		);
+
+	}
+
+	/**
+	 * Returns the access token.
+	 *
+	 * @since   1.8.9
+	 *
+	 * @return  string
+	 */
+	public function access_token() {
+
+		return $this->access_token;
 
 	}
 
