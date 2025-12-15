@@ -25,6 +25,7 @@ modules:
         - \Tests\Support\Helper\Plugin
         - \Tests\Support\Helper\ThirdPartyPlugin
         - \Tests\Support\Helper\WPForms
+        - \Tests\Support\Helper\WPNotices
         - \Tests\Support\Helper\Xdebug
     config:
         lucatume\WPBrowser\Module\WPWebDriver:
@@ -40,7 +41,6 @@ modules:
             capabilities:
               "goog:chromeOptions":
                 args:
-                  - "--headless"
                   - "--disable-gpu"
                   - "--disable-dev-shm-usage"
                   - "--disable-software-rasterizer"

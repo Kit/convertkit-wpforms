@@ -127,6 +127,58 @@ class IntegrationsCest
 	}
 
 	/**
+	 * Test that an error notification is displayed when the API credentials are invalid.
+	 *
+	 * @since   1.8.9
+	 *
+	 * @param   EndToEndTester $I  Tester.
+	 */
+	public function testInvalidCredentials(EndToEndTester $I)
+	{
+		// Define connection with invalid API credentials.
+		$I->setupWPFormsIntegration(
+			$I,
+			'fakeAccessToken',
+			'fakeRefreshToken'
+		);
+
+		// Setup WPForms Form and configuration for this test.
+		// Create Form.
+		$wpFormsID = $I->createWPFormsForm($I);
+
+		// Load WPForms Editor.
+		$I->amOnAdminPage('admin.php?page=wpforms-builder&view=fields&form_id=' . $wpFormsID);
+
+		// Click Marketing icon.
+		$I->waitForElementVisible('.wpforms-panel-providers-button');
+		$I->click('.wpforms-panel-providers-button');
+
+		// Click ConvertKit tab.
+		$I->click('#wpforms-panel-providers a.wpforms-panel-sidebar-section-convertkit');
+
+		// Click Add New Connection.
+		$I->click('Add New Connection');
+
+		// Define name for connection.
+		$I->waitForElementVisible('.jconfirm-content');
+		$I->fillField('#provider-connection-name', 'Kit');
+		$I->click('OK');
+
+		// Get the connection ID.
+		$I->waitForElementVisible('.wpforms-provider-connections .wpforms-provider-connection');
+		$connectionID = $I->grabAttributeFrom('.wpforms-provider-connections .wpforms-provider-connection', 'data-connection_id');
+
+		// Specify field values.
+		$I->waitForElementVisible('div[data-connection_id="' . $connectionID . '"] .wpforms-provider-fields', 30);
+
+		// Navigate to the WordPress Admin.
+		$I->amOnAdminPage('index.php');
+
+		// Check that a notice is displayed that the API credentials are invalid.
+		$I->seeErrorNotice($I, 'Kit for WPForms: Authorization failed. Please reconnect your Kit account.');
+	}
+
+	/**
 	 * Deactivate and reset Plugin(s) after each test, if the test passes.
 	 * We don't use _after, as this would provide a screenshot of the Plugin
 	 * deactivation and not the true test error.
