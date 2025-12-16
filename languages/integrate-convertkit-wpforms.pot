@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.8.7\n"
+"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.8.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/convertkit-wpforms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-20T03:49:56+00:00\n"
+"POT-Creation-Date: 2025-12-16T07:48:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: integrate-convertkit-wpforms\n"
@@ -35,6 +35,14 @@ msgstr ""
 #: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:98
 #: includes/class-integrate-convertkit-wpforms-creator-network-recommendations.php:113
 msgid "Kit"
+msgstr ""
+
+#: includes/class-integrate-convertkit-wpforms-admin-notices.php:72
+msgid "Kit for WPForms: Authorization failed. Please"
+msgstr ""
+
+#: includes/class-integrate-convertkit-wpforms-admin-notices.php:76
+msgid "reconnect your Kit account."
 msgstr ""
 
 #: includes/class-integrate-convertkit-wpforms-api.php:67
@@ -237,88 +245,88 @@ msgstr ""
 msgid "Connect to Kit"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:755
+#: includes/class-integrate-convertkit-wpforms.php:794
 msgid "Kit: Account connected successfully."
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:764
+#: includes/class-integrate-convertkit-wpforms.php:803
 msgid "Kit: "
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:948
+#: includes/class-integrate-convertkit-wpforms.php:991
 msgid "Kit: Email"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:954
+#: includes/class-integrate-convertkit-wpforms.php:997
 msgid "Kit: First Name"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:959
+#: includes/class-integrate-convertkit-wpforms.php:1002
 msgid "Kit: Tag"
 msgstr ""
 
 #. translators: ConvertKit Custom Field label
-#: includes/class-integrate-convertkit-wpforms.php:987
+#: includes/class-integrate-convertkit-wpforms.php:1035
 #, php-format
 msgid "Kit: Custom Field: %s"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:1022
+#: includes/class-integrate-convertkit-wpforms.php:1070
 msgid "No Kit connections exist."
 msgstr ""
 
 #. translators: WPForms ConvertKit Account ID
-#: includes/class-integrate-convertkit-wpforms.php:1030
+#: includes/class-integrate-convertkit-wpforms.php:1078
 #, php-format
 msgid "The Kit connection with ID %s was unregistered."
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:11
+#: views/backend/settings-form-marketing-forms-dropdown.php:20
 msgid "Kit Form"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:15
-#: views/backend/settings-form-marketing-forms-dropdown.php:66
+#: views/backend/settings-form-marketing-forms-dropdown.php:24
+#: views/backend/settings-form-marketing-forms-dropdown.php:75
 msgid "Subscribe"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:18
+#: views/backend/settings-form-marketing-forms-dropdown.php:27
 msgid "Forms"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:34
+#: views/backend/settings-form-marketing-forms-dropdown.php:43
 msgid "Sequences"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:49
+#: views/backend/settings-form-marketing-forms-dropdown.php:58
 msgid "Tags"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:66
+#: views/backend/settings-form-marketing-forms-dropdown.php:75
 msgid "Subscribes the email address to Kit"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:68
+#: views/backend/settings-form-marketing-forms-dropdown.php:77
 msgid "Form"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:68
+#: views/backend/settings-form-marketing-forms-dropdown.php:77
 msgid "Subscribes the email address to Kit, and adds the subscriber to the Kit Form"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:70
+#: views/backend/settings-form-marketing-forms-dropdown.php:79
 msgid "Tag"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:70
+#: views/backend/settings-form-marketing-forms-dropdown.php:79
 msgid "Subscribes the email address to Kit, tagging the subscriber"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:72
+#: views/backend/settings-form-marketing-forms-dropdown.php:81
 msgid "Sequence"
 msgstr ""
 
-#: views/backend/settings-form-marketing-forms-dropdown.php:72
+#: views/backend/settings-form-marketing-forms-dropdown.php:81
 msgid "Subscribes the email address to Kit, and adds the subscriber to the Kit sequence"
 msgstr ""
 
