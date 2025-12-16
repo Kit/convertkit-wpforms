@@ -667,8 +667,8 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 	}
 
 	/**
-	 * Outputs a <select> dropdown of ConvertKit Forms, allowing the user
-	 * to choose which ConvertKit Form to send form submissions to.
+	 * Outputs a <select> dropdown of Kit Forms, Sequences and Tags, allowing the user
+	 * to choose which resource to send form submissions to.
 	 *
 	 * @since   1.5.0
 	 *
@@ -691,28 +691,67 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 			return '';
 		}
 
+		// Get the selected ConvertKit subscribe setting, if one was already defined.
+		$value = ! empty( $connection['list_id'] ) ? $connection['list_id'] : '';
+
+		// Initialize resource classes.
+		$forms     = new Integrate_ConvertKit_WPForms_Resource_Forms( $api, $connection['account_id'] );
+		$sequences = new Integrate_ConvertKit_WPForms_Resource_Sequences( $api, $connection['account_id'] );
+		$tags      = new Integrate_ConvertKit_WPForms_Resource_Tags( $api, $connection['account_id'] );
+
 		// Fetch Forms.
 		// We use refresh() to ensure we get the latest data, as we're in the admin interface
 		// and need to populate the select dropdown.
-		$forms = new Integrate_ConvertKit_WPForms_Resource_Forms( $api, $connection['account_id'] );
-		$forms->refresh();
+		$result = $forms->refresh();
+
+		// Return the <select> dropdown if an error occurred, so the cached resources are
+		// available for selection.
+		if ( is_wp_error( $result ) ) {
+			return $this->output_select_dropdown( $forms, $sequences, $tags, $value, $connection_id, $result->get_error_message() );
+		}
 
 		// Fetch Sequences.
 		// We use refresh() to ensure we get the latest data, as we're in the admin interface
 		// and need to populate the select dropdown.
-		$sequences = new Integrate_ConvertKit_WPForms_Resource_Sequences( $api, $connection['account_id'] );
-		$sequences->refresh();
+		$result = $sequences->refresh();
+
+		// Return the <select> dropdown if an error occurred, so the cached resources are
+		// available for selection.
+		if ( is_wp_error( $result ) ) {
+			return $this->output_select_dropdown( $forms, $sequences, $tags, $value, $connection_id, $result->get_error_message() );
+		}
 
 		// Fetch Tags.
 		// We use refresh() to ensure we get the latest data, as we're in the admin interface
 		// and need to populate the select dropdown.
-		$tags = new Integrate_ConvertKit_WPForms_Resource_Tags( $api, $connection['account_id'] );
-		$tags->refresh();
+		$result = $tags->refresh();
 
-		// Get the selected ConvertKit subscribe setting, if one was already defined.
-		$value = ! empty( $connection['list_id'] ) ? $connection['list_id'] : '';
+		// Return the <select> dropdown if an error occurred, so the cached resources are
+		// available for selection.
+		if ( is_wp_error( $result ) ) {
+			return $this->output_select_dropdown( $forms, $sequences, $tags, $value, $connection_id, $result->get_error_message() );
+		}
 
 		// Output <select> dropdown.
+		return $this->output_select_dropdown( $forms, $sequences, $tags, $value, $connection_id );
+
+	}
+
+	/**
+	 * Outputs the <select> dropdown.
+	 *
+	 * @since   1.8.9
+	 *
+	 * @param   Integrate_ConvertKit_WPForms_Resource_Forms     $forms         Forms resource.
+	 * @param   Integrate_ConvertKit_WPForms_Resource_Sequences $sequences     Sequences resource.
+	 * @param   Integrate_ConvertKit_WPForms_Resource_Tags      $tags          Tags resource.
+	 * @param   string                                          $value         Selected value.
+	 * @param   string                                          $connection_id Connection ID.
+	 * @param   string                                          $error_message Error message.
+	 * @return  string
+	 */
+	private function output_select_dropdown( $forms, $sequences, $tags, $value, $connection_id, $error_message = '' ) {
+
 		ob_start();
 		require INTEGRATE_CONVERTKIT_WPFORMS_PATH . '/views/backend/settings-form-marketing-forms-dropdown.php';
 		return ob_get_clean();
@@ -871,6 +910,10 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 			)
 		);
 
+		// Remove any existing persistent notice.
+		$admin_notices = Integrate_ConvertKit_WPForms_Admin_Notices::get_instance();
+		$admin_notices->delete( 'authorization_failed' );
+
 		// If this request is served in a popup window (i.e. from the form builder),
 		// serve a view that will close the popup.
 		if ( array_key_exists( 'convertkit-modal', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -973,6 +1016,11 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 		// Fetch Custom Fields.
 		$resource_custom_fields = new Integrate_ConvertKit_WPForms_Resource_Custom_Fields( $api, $account_id );
 		$custom_fields          = $resource_custom_fields->refresh();
+
+		// Just return fields if an error occurred.
+		if ( is_wp_error( $custom_fields ) ) {
+			return $provider_fields;
+		}
 
 		// Just return fields if no custom fields exist in ConvertKit.
 		if ( ! count( $custom_fields ) ) {

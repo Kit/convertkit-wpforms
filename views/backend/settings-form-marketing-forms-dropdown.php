@@ -8,6 +8,15 @@
 
 ?>
 <div class="wpforms-provider-lists wpforms-connection-block">
+<?php
+if ( ! empty( $error_message ) ) {
+	printf(
+		'<div class="wpforms-error wpforms-alert wpforms-alert-error"><p>%s</p></div>',
+		esc_html( $error_message )
+	);
+}
+?>
+
 	<h4><?php esc_html_e( 'Kit Form', 'integrate-convertkit-wpforms' ); ?></h4>
 
 	<select name="providers[<?php echo esc_attr( $this->slug ); ?>][<?php echo esc_attr( $connection_id ); ?>][list_id]" size="1">

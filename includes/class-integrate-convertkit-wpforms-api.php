@@ -113,4 +113,17 @@ class Integrate_ConvertKit_WPForms_API extends ConvertKit_API_V4 {
 
 	}
 
+	/**
+	 * Returns the access token.
+	 *
+	 * @since   1.8.9
+	 *
+	 * @return  string
+	 */
+	public function access_token() {
+
+		return $this->access_token;
+
+	}
+
 }
