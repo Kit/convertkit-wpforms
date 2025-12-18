@@ -42,7 +42,7 @@ No. You must first have an account on kit.com, but you do not have to use a paid
 
 == Changelog ==
 
-### 1.8.9 2025-12-xx
+### 1.8.9 2025-12-18
 * Fix: Settings: Automatically delete invalid Access Tokens
 * Updated: Use WordPress Libraries 2.1.3
 
