@@ -9,7 +9,7 @@
  * Plugin Name: Kit (formerly ConvertKit) for WPForms
  * Plugin URI:  https://kit.com
  * Description: Create Kit signup forms using WPForms
- * Version:     1.9.0
+ * Version:     1.9.0.1
  * Author:      Kit
  * Author URI:  https://kit.com
  * Text Domain: integrate-convertkit-wpforms
@@ -28,12 +28,12 @@ define( 'INTEGRATE_CONVERTKIT_WPFORMS_NAME', 'ConvertKitWPForms' ); // Used for 
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_FILE', plugin_basename( __FILE__ ) );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_URL', plugin_dir_url( __FILE__ ) );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_PATH', __DIR__ );
-define( 'INTEGRATE_CONVERTKIT_WPFORMS_VERSION', '1.9.0' );
+define( 'INTEGRATE_CONVERTKIT_WPFORMS_VERSION', '1.9.0.1' );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_CLIENT_ID', '147qqKJeENYp5MqgL6AOShDDcLK3UQeClmcIV1ij3gI' );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_REDIRECT_URI', 'https://app.kit.com/wordpress/redirect' );
 
 // Load shared classes, if they have not been included by another ConvertKit Plugin.
-if ( ! trait_exists( 'ConvertKit_API_Traits' ) ) {
+if ( ! trait_exists( 'ConvertKit_API\ConvertKit_API_Traits' ) ) {
 	require_once INTEGRATE_CONVERTKIT_WPFORMS_PATH . '/vendor/convertkit/convertkit-wordpress-libraries/src/class-convertkit-api-traits.php';
 }
 if ( ! class_exists( 'ConvertKit_API_V4' ) ) {
