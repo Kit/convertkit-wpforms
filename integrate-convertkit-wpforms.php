@@ -33,7 +33,7 @@ define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_CLIENT_ID', '147qqKJeENYp5MqgL6AOShD
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_REDIRECT_URI', 'https://app.kit.com/wordpress/redirect' );
 
 // Load shared classes, if they have not been included by another ConvertKit Plugin.
-if ( ! trait_exists( 'ConvertKit_API\ConvertKit_API_Traits' ) ) {
+if ( ! trait_exists( 'ConvertKit_API_Traits' ) && ! trait_exists( 'ConvertKit_API\ConvertKit_API_Traits' ) ) {
 	require_once INTEGRATE_CONVERTKIT_WPFORMS_PATH . '/vendor/convertkit/convertkit-wordpress-libraries/src/class-convertkit-api-traits.php';
 }
 if ( ! class_exists( 'ConvertKit_API_V4' ) ) {
