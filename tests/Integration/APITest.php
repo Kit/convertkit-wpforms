@@ -221,19 +221,6 @@ class APITest extends WPTestCase
 			wp_generate_password( 10, false ) // Random tenant name to produce a token for this request only.
 		);
 
-		// Store the access token in the Plugin's settings.
-		wpforms_update_providers_options(
-			'convertkit',
-			array(
-				'access_token'  => $result['oauth']['access_token'],
-				'refresh_token' => $result['oauth']['refresh_token'],
-				'token_expires' => $result['oauth']['expires_at'],
-				'label'         => 'Kit WordPress',
-				'date'          => time(),
-			),
-			'wpunittest1234'
-		);
-
 		// Initialize the API with the access token and refresh token.
 		$api = new \Integrate_ConvertKit_WPForms_API(
 			$_ENV['CONVERTKIT_OAUTH_CLIENT_ID'],
@@ -247,12 +234,6 @@ class APITest extends WPTestCase
 
 		// Revoke the access and refresh tokens.
 		$api->revoke_tokens();
-
-		// Confirm the access token and refresh token are deleted from the Plugin's settings.
-		$providers = wpforms_get_providers_options();
-		$account   = reset( $providers['convertkit'] );
-		$this->assertEmpty( $account['access_token'] );
-		$this->assertEmpty( $account['refresh_token'] );
 
 		// Initialize the API with the (now revoked) access token and refresh token.
 		// revoke_tokens() will have removed the access token and refresh token from the API class, so we need to provide them again

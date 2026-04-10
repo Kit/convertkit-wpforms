@@ -148,83 +148,8 @@ function integrate_convertkit_wpforms_maybe_delete_credentials( $result, $client
 
 }
 
-/**
- * Deletes the stored access token, refresh token and its expiry from the Plugin settings,
- * and clears any existing scheduled WordPress Cron event to refresh the token on expiry,
- * when the user revokes the access token.
- *
- * @since   1.9.2
- *
- * @param   string $client_id               OAuth Client ID used for the Access and Refresh Tokens.
- * @param   string $revoked_access_token    Revoked Access Token.
- */
-function integrate_convertkit_wpforms_delete_credentials( $client_id, $revoked_access_token ) {
-
-	error_log( 'integrate_convertkit_wpforms_delete_credentials: ' . $client_id . ' - ' . $revoked_access_token );
-
-	// Don't save these credentials if they're not for this Client ID.
-	// They're for another ConvertKit Plugin that uses OAuth.
-	if ( $client_id !== INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_CLIENT_ID ) {
-		return;
-	}
-
-	// Get all registered providers in WPForms.
-	$providers = wpforms_get_providers_options();
-
-	error_log( print_r( $providers, true ) );
-
-	// Bail if no ConvertKit providers were registered.
-	if ( ! array_key_exists( 'convertkit', $providers ) ) {
-		return;
-	}
-
-	error_log( print_r( $providers['convertkit'], true ) );
-
-	// Iterate through providers to find the specific connection containing the now revoked Access Token.
-	foreach ( $providers['convertkit'] as $id => $settings ) {
-		// Skip if this isn't the connection.
-		if ( $settings['access_token'] !== $revoked_access_token ) {
-			continue;
-		}
-
-		error_log( 'id: ' . $id );
-
-		// Remove the invalid tokens from the connection.
-		// Keep the connection so the user doesn't lose settings on WPForms Forms.
-		// They can use the Reconnect link at WPForms > Settings > Integrations > Kit > Reconnect.
-		wpforms_update_providers_options(
-			'convertkit',
-			array(
-				'access_token'  => '',
-				'refresh_token' => '',
-				'token_expires' => 0,
-				'api_key'       => '',
-				'api_secret'    => '',
-				'label'         => $settings['label'],
-				'date'          => time(),
-			),
-			$id
-		);
-
-		// Clear any existing scheduled WordPress Cron event for this connection.
-		wp_clear_scheduled_hook(
-			'integrate_convertkit_wpforms_refresh_token',
-			array(
-				$id,
-			)
-		);
-
-		// Break out of the loop now the credentials have been removed.
-		break;
-	}
-
-}
-
 // Update Access Token when refreshed by the API class.
 add_action( 'convertkit_api_refresh_token', 'integrate_convertkit_wpforms_maybe_update_credentials', 10, 3 );
-
-// Delete credentials when the user revokes the access and refresh tokens.
-add_action( 'convertkit_api_revoke_tokens', 'integrate_convertkit_wpforms_delete_credentials', 10, 2 );
 
 // Delete credentials if the API class uses a invalid access token.
 // This prevents the Plugin making repetitive API requests that will 401.

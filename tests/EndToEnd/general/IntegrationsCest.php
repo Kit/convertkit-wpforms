@@ -176,18 +176,18 @@ class IntegrationsCest
 	 */
 	public function testCredentialsAndResourcesAreDeletedOnDisconnect(EndToEndTester $I)
 	{
+		// Define a random account ID.
+		$accountID = 'kit-' . wp_generate_password( 10, false );
+
 		// Fake the API Key, Access and Refresh Tokens; if we revoke the tokens used for tests, future tests will fail.
 		$I->setupWPFormsIntegration(
 			$I,
 			accessToken: 'fakeAccessToken',
 			refreshToken: 'fakeRefreshToken',
 			apiKey: 'fakeAPIKey',
-			apiSecret: 'fakeAPISecret'
+			apiSecret: 'fakeAPISecret',
+			accountID: $accountID
 		);
-
-		$providers = $I->grabOptionFromDatabase('wpforms_providers');
-		var_dump($providers);
-		die();
 
 		// Load WPForms > Settings > Integrations.
 		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=integrations');
@@ -207,32 +207,18 @@ class IntegrationsCest
 		$I->wait(3);
 		$I->dontSee('Connected on:');
 
-		// Check connection's credentials are removed from the settings.
+		// Check connection is removed from the settings.
+		// Clicking 'Disconnect' in WPForms removes the connection from the settings,
+		// including any credentials within that connection.
 		$providers = $I->grabOptionFromDatabase('wpforms_providers');
 		$I->assertArrayHasKey('convertkit', $providers);
-
-		var_dump($providers);
-
-		// Get first integration for Kit, and confirm it has the expected array structure and values.
-		$account = reset( $providers['convertkit'] );
-		var_dump($account);
-		die();
-		
-		$I->assertEquals('', $account['access_token']);
-		$I->assertEquals('', $account['refresh_token']);
-		$I->assertEquals('', $account['token_expires']);
-		$I->assertEquals('', $account['api_key']);
-		$I->assertEquals('', $account['api_secret']);
+		$I->assertCount(0, $providers['convertkit']);
 
 		// Check cached resources are removed from the database on disconnection.
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_custom_fields');
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_custom_fields_last_queried');
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_forms');
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_forms_last_queried');
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_sequences');
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_sequences_last_queried');
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_tags');
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_tags_last_queried');
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_custom_fields_' . $accountID);
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_forms_' . $accountID);
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_sequences_' . $accountID);
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_tags_' . $accountID);
 	}
 
 	/**
