@@ -91,17 +91,6 @@ class IntegrationsCest
 			),
 			$reconnectURL
 		);
-
-		// Confirm that the connection can be disconnected.
-		$I->click('Disconnect');
-
-		// Confirm that we want to disconnect.
-		$I->waitForElementVisible('.jconfirm-box');
-		$I->click('.jconfirm-box button.btn-confirm');
-
-		// Confirm no connection is listed.
-		$I->wait(3);
-		$I->dontSee('Connected on:');
 	}
 
 	/**
@@ -138,8 +127,8 @@ class IntegrationsCest
 		// Define connection with invalid API credentials.
 		$I->setupWPFormsIntegration(
 			$I,
-			'fakeAccessToken',
-			'fakeRefreshToken'
+			accessToken: 'fakeAccessToken',
+			refreshToken: 'fakeRefreshToken'
 		);
 
 		// Setup WPForms Form and configuration for this test.
@@ -176,6 +165,74 @@ class IntegrationsCest
 
 		// Check that a notice is displayed that the API credentials are invalid.
 		$I->seeErrorNotice($I, 'Kit for WPForms: Authorization failed. Please reconnect your Kit account.');
+	}
+
+	/**
+	 * Test that the credentials and resources are deleted on disconnect.
+	 *
+	 * @since   1.9.2
+	 *
+	 * @param   EndToEndTester $I  Tester.
+	 */
+	public function testCredentialsAndResourcesAreDeletedOnDisconnect(EndToEndTester $I)
+	{
+		// Fake the API Key, Access and Refresh Tokens; if we revoke the tokens used for tests, future tests will fail.
+		$I->setupWPFormsIntegration(
+			$I,
+			accessToken: 'fakeAccessToken',
+			refreshToken: 'fakeRefreshToken',
+			apiKey: 'fakeAPIKey',
+			apiSecret: 'fakeAPISecret'
+		);
+
+		$providers = $I->grabOptionFromDatabase('wpforms_providers');
+		var_dump($providers);
+		die();
+
+		// Load WPForms > Settings > Integrations.
+		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=integrations');
+
+		// Expand Kit integration section.
+		$I->click('#wpforms-integration-convertkit');
+
+		// Disconnect the connection to Kit.
+		$I->waitForElementVisible('a[data-provider="convertkit"]');
+		$I->click('Disconnect');
+
+		// Confirm that we want to disconnect.
+		$I->waitForElementVisible('.jconfirm-box');
+		$I->click('.jconfirm-box button.btn-confirm');
+
+		// Confirm no connection is listed.
+		$I->wait(3);
+		$I->dontSee('Connected on:');
+
+		// Check connection's credentials are removed from the settings.
+		$providers = $I->grabOptionFromDatabase('wpforms_providers');
+		$I->assertArrayHasKey('convertkit', $providers);
+
+		var_dump($providers);
+
+		// Get first integration for Kit, and confirm it has the expected array structure and values.
+		$account = reset( $providers['convertkit'] );
+		var_dump($account);
+		die();
+		
+		$I->assertEquals('', $account['access_token']);
+		$I->assertEquals('', $account['refresh_token']);
+		$I->assertEquals('', $account['token_expires']);
+		$I->assertEquals('', $account['api_key']);
+		$I->assertEquals('', $account['api_secret']);
+
+		// Check cached resources are removed from the database on disconnection.
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_custom_fields');
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_custom_fields_last_queried');
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_forms');
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_forms_last_queried');
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_sequences');
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_sequences_last_queried');
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_tags');
+		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_tags_last_queried');
 	}
 
 	/**

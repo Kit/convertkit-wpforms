@@ -17,10 +17,12 @@ class WPForms extends \Codeception\Module
 	 * @param   EndToEndTester $I             Tester.
 	 * @param   bool|string    $accessToken   Access Token (if not specified, CONVERTKIT_OAUTH_ACCESS_TOKEN is used).
 	 * @param   bool|string    $refreshToken  Refresh Token (if not specified, CONVERTKIT_OAUTH_REFRESH_TOKEN is used).
+	 * @param   bool|string    $apiKey        API Key (if not specified, CONVERTKIT_API_KEY is used).
+	 * @param   bool|string    $apiSecret     API Secret (if not specified, CONVERTKIT_API_SECRET is used).
 	 * @param   string         $accountID     Kit Account ID.
 	 * @return  string                          Account ID in WPForms.
 	 */
-	public function setupWPFormsIntegration($I, $accessToken = false, $refreshToken = false, $accountID = false)
+	public function setupWPFormsIntegration($I, $accessToken = false, $refreshToken = false, $apiKey = false, $apiSecret = false, $accountID = false)
 	{
 		$accountID = 'kit-' . ( $accountID ? $accountID : $_ENV['CONVERTKIT_API_ACCOUNT_ID'] );
 
@@ -31,6 +33,8 @@ class WPForms extends \Codeception\Module
 					$accountID => [
 						'access_token'  => $accessToken ? $accessToken : $_ENV['CONVERTKIT_OAUTH_ACCESS_TOKEN'],
 						'refresh_token' => $refreshToken ? $refreshToken : $_ENV['CONVERTKIT_OAUTH_REFRESH_TOKEN'],
+						'api_key'       => $apiKey ? $apiKey : $_ENV['CONVERTKIT_API_KEY'],
+						'api_secret'    => $apiSecret ? $apiSecret : $_ENV['CONVERTKIT_API_SECRET'],
 						'label'         => 'Kit',
 						'date'          => strtotime('now'),
 					],
