@@ -46,7 +46,7 @@ class UninstallCest
 		$tokens = json_decode(wp_remote_retrieve_body($result), true)['oauth'];
 
 		// Store the tokens and API keys in the Plugin's settings.
-		$I->setupConvertKitPlugin(
+		$I->setupWPFormsIntegration(
 			$I,
 			accessToken: $tokens['access_token'],
 			refreshToken: $tokens['refresh_token'],
@@ -62,11 +62,12 @@ class UninstallCest
 
 		// Confirm the credentials have been removed from the Plugin's settings.
 		$I->wait(3);
-		$settings = $I->grabOptionFromDatabase('woocommerce_ckwc_settings');
-		$I->assertEmpty($settings['access_token']);
-		$I->assertEmpty($settings['refresh_token']);
-		$I->assertEmpty($settings['api_key']);
-		$I->assertEmpty($settings['api_secret']);
+		$settings   = $I->grabOptionFromDatabase('wpforms_providers');
+		$connection = reset($settings['convertkit']);
+		$I->assertEmpty($connection['access_token']);
+		$I->assertEmpty($connection['refresh_token']);
+		$I->assertEmpty($connection['api_key']);
+		$I->assertEmpty($connection['api_secret']);
 
 		// Confirm attempting to use the revoked access token no longer works.
 		$result = wp_remote_get(

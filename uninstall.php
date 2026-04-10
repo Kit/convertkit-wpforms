@@ -30,53 +30,53 @@ if ( ! array_key_exists( 'convertkit', $providers ) ) {
 }
 
 // Iterate through each connection, revoking the tokens.
-foreach ( $providers['convertkit'] as $account_id =>$connection ) {
-    // Revoke Access Token.
-    if ( array_key_exists( 'access_token', $connection ) && ! empty( $connection['access_token'] ) ) {
-        wp_remote_post(
-            'https://api.kit.com/v4/oauth/revoke',
-            array(
-                'headers' => array(
-                    'Accept'       => 'application/json',
-                    'Content-Type' => 'application/json',
-                ),
-                'body'    => wp_json_encode(
-                    array(
-                        'client_id' => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
-                        'token'     => $connection['access_token'],
-                    )
-                ),
-                'timeout' => 5,
-            )
-        );
-    }
+foreach ( $providers['convertkit'] as $account_id => $connection ) {
+	// Revoke Access Token.
+	if ( array_key_exists( 'access_token', $connection ) && ! empty( $connection['access_token'] ) ) {
+		wp_remote_post(
+			'https://api.kit.com/v4/oauth/revoke',
+			array(
+				'headers' => array(
+					'Accept'       => 'application/json',
+					'Content-Type' => 'application/json',
+				),
+				'body'    => wp_json_encode(
+					array(
+						'client_id' => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
+						'token'     => $connection['access_token'],
+					)
+				),
+				'timeout' => 5,
+			)
+		);
+	}
 
-    // Revoke Refresh Token.
-    if ( array_key_exists( 'refresh_token', $connection ) && ! empty( $connection['refresh_token'] ) ) {
-        wp_remote_post(
-            'https://api.kit.com/v4/oauth/revoke',
-            array(
-                'headers' => array(
-                    'Accept'       => 'application/json',
-                    'Content-Type' => 'application/json',
-                ),
-                'body'    => wp_json_encode(
-                    array(
-                        'client_id' => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
-                        'token'     => $connection['refresh_token'],
-                    )
-                ),
-                'timeout' => 5,
-            )
-        );
-    }
+	// Revoke Refresh Token.
+	if ( array_key_exists( 'refresh_token', $connection ) && ! empty( $connection['refresh_token'] ) ) {
+		wp_remote_post(
+			'https://api.kit.com/v4/oauth/revoke',
+			array(
+				'headers' => array(
+					'Accept'       => 'application/json',
+					'Content-Type' => 'application/json',
+				),
+				'body'    => wp_json_encode(
+					array(
+						'client_id' => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
+						'token'     => $connection['refresh_token'],
+					)
+				),
+				'timeout' => 5,
+			)
+		);
+	}
 
-    // Remove credentials from settings.
-    $providers['convertkit'][ $account_id ]['access_token']  = '';
-    $providers['convertkit'][ $account_id ]['refresh_token'] = '';
-    $providers['convertkit'][ $account_id ]['token_expires'] = '';
-    $providers['convertkit'][ $account_id ]['api_key']       = '';
-    $providers['convertkit'][ $account_id ]['api_secret']    = '';
+	// Remove credentials from settings.
+	$providers['convertkit'][ $account_id ]['access_token']  = '';
+	$providers['convertkit'][ $account_id ]['refresh_token'] = '';
+	$providers['convertkit'][ $account_id ]['token_expires'] = '';
+	$providers['convertkit'][ $account_id ]['api_key']       = '';
+	$providers['convertkit'][ $account_id ]['api_secret']    = '';
 }
 
 // Save settings.
