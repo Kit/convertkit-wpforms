@@ -215,7 +215,7 @@ class IntegrationsCest
 		$I->assertCount(0, $providers['convertkit']);
 
 		// Check cached resources are removed from the database on disconnection.
-		$I->dontSeeCachedResourcesInDatabase($I, $this->accountID);
+		$I->dontSeeCachedResourcesInDatabase($I, $accountID);
 	}
 
 	/**
