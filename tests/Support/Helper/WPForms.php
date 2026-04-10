@@ -565,32 +565,17 @@ class WPForms extends \Codeception\Module
 	}
 
 	/**
-	 * Disconnects the given account ID via the UI in WPForms > Settings > Integrations.
+	 * Removes the given account ID from the WPForms provider settings.
 	 *
 	 * @since   1.7.0
 	 *
 	 * @param   EndToEndTester $I         Tester.
 	 * @param   string         $accountID Account ID.
 	 */
-	public function disconnectAccount($I, $accountID)
+	public function removeProviderConnection($I, $accountID)
 	{
-		// Login as the Administrator, if we're not already logged in.
-		if ( ! $I->amLoggedInAsAdmin($I) ) {
-			$I->doLoginAsAdmin($I);
-		}
-
-		// Click Disconnect.
-		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=integrations');
-		$I->click('#wpforms-integration-convertkit');
-		$I->waitForElementVisible('#wpforms-integration-convertkit .wpforms-settings-provider-accounts-list span.remove a[data-key="' . $accountID . '"]');
-		$I->click('#wpforms-integration-convertkit .wpforms-settings-provider-accounts-list span.remove a[data-key="' . $accountID . '"]');
-
-		// Confirm that we want to disconnect.
-		$I->waitForElementVisible('.jconfirm-box');
-		$I->click('.jconfirm-box button.btn-confirm');
-
-		// Confirm connection is no longer listed.
-		$I->wait(5);
-		$I->dontSeeElementInDOM('a[data-key="' . $accountID . '"]');
+		$providers = $I->grabOptionFromDatabase('wpforms_providers');
+		unset($providers['convertkit'][ $accountID ]);
+		$I->haveOptionInDatabase('wpforms_providers', $providers);
 	}
 }

@@ -215,10 +215,7 @@ class IntegrationsCest
 		$I->assertCount(0, $providers['convertkit']);
 
 		// Check cached resources are removed from the database on disconnection.
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_custom_fields_' . $accountID);
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_forms_' . $accountID);
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_sequences_' . $accountID);
-		$I->dontSeeOptionInDatabase('integrate_convertkit_wpforms_tags_' . $accountID);
+		$I->dontSeeCachedResourcesInDatabase($I, $this->accountID);
 	}
 
 	/**
