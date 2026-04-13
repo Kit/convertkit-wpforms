@@ -36,6 +36,18 @@ class Plugin extends \Codeception\Module
 	}
 
 	/**
+	 * Helper method to delete the Kit Plugin.
+	 *
+	 * @since   1.9.2
+	 *
+	 * @param   EndToEndTester $I     EndToEndTester.
+	 */
+	public function deleteKitPlugin($I)
+	{
+		$I->deleteThirdPartyPlugin($I, 'integrate-convertkit-wpforms');
+	}
+
+	/**
 	 * Helper method to determine that the order of the Form resources in the given
 	 * select element are in the expected alphabetical order.
 	 *
