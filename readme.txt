@@ -5,7 +5,7 @@ Tags: form, wpforms, convertkit, email, marketing
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.1
-Stable tag: 1.9.2
+Stable tag: 1.9.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,6 +41,9 @@ No. You must first have an account on kit.com, but you do not have to use a paid
 2. WPForms Kit Form Settings when editing a WPForms Form at Marketing > Kit
 
 == Changelog ==
+
+### 1.9.3 2026-04-22
+* Updated: WordPress Libraries to 2.1.6
 
 ### 1.9.2 2026-04-13
 * Added: Settings: Revoke Access and Refresh Tokens, and remove from settings, when `Disconnect` button clicked
