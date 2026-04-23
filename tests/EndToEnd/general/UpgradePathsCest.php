@@ -39,11 +39,8 @@ class UpgradePathsCest
 
 		// Get first integration for ConvertKit, and confirm it has the expected array structure and values.
 		$account = reset( $providers['convertkit'] );
-		$I->assertArrayHasKey('api_key', $account);
-		$I->assertArrayHasKey('api_secret', $account);
 		$I->assertArrayHasKey('label', $account);
 		$I->assertArrayHasKey('date', $account);
-		$I->assertEquals($_ENV['CONVERTKIT_API_KEY'], $account['api_key']);
 		$I->assertEquals('Kit', $account['label']);
 	}
 
@@ -148,5 +145,46 @@ class UpgradePathsCest
 				'post_content' => json_encode( $settings ), // phpcs:ignore WordPress.WP.AlternativeFunctions
 			]
 		);
+	}
+
+	/**
+	 * Tests that the v3 API Key and Secret are removed from settings when upgrading to 1.9.2 or later.
+	 *
+	 * @since   1.9.2
+	 *
+	 * @param   EndToEndTester $I  Tester.
+	 */
+	public function testV3APIKeyAndSecretRemovedFromSettings(EndToEndTester $I)
+	{
+		// Setup Plugin's settings with an API Key and Secret.
+		$I->setupWPFormsIntegrationWithAPIKeyAndSecret($I);
+
+		// Define an installation version older than 1.9.2.
+		$I->haveOptionInDatabase('integrate_convertkit_wpforms_version', '1.9.0');
+
+		// Activate Plugins.
+		$I->activateThirdPartyPlugin($I, 'wpforms-lite');
+		$I->activateConvertKitPlugin($I);
+
+		// Confirm the provider connections no longer have a value for the v3 API Key and Secret.
+		$settings   = $I->grabOptionFromDatabase('wpforms_providers');
+		$connection = reset($settings['convertkit']);
+		$I->assertEmpty($connection['api_key']);
+		$I->assertEmpty($connection['api_secret']);
+	}
+
+	/**
+	 * Deactivate and reset Plugin(s) after each test, if the test passes.
+	 * We don't use _after, as this would provide a screenshot of the Plugin
+	 * deactivation and not the true test error.
+	 *
+	 * @since   1.9.2
+	 *
+	 * @param   EndToEndTester $I  Tester.
+	 */
+	public function _passed(EndToEndTester $I)
+	{
+		$I->deactivateConvertKitPlugin($I);
+		$I->deactivateThirdPartyPlugin($I, 'wpforms-lite');
 	}
 }

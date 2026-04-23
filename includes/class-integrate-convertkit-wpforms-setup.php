@@ -52,8 +52,53 @@ class Integrate_ConvertKit_WPForms_Setup {
 			$this->migrate_form_settings();
 		}
 
+		// Actions that should run regardless of the version number
+		// whenever the Plugin is updated.
+		$this->remove_v3_api_key_and_secret_from_settings();
+
 		// Update the installed version number in the options table.
 		update_option( 'integrate_convertkit_wpforms_version', INTEGRATE_CONVERTKIT_WPFORMS_VERSION );
+
+	}
+
+	/**
+	 * Remove v3 API key and Secret from settings.
+	 *
+	 * @since   1.9.2
+	 */
+	private function remove_v3_api_key_and_secret_from_settings() {
+
+		// Bail if the wpforms_get_providers_options() function isn't available.
+		if ( ! function_exists( 'wpforms_get_providers_options' ) ) {
+			return;
+		}
+
+		// Get providers.
+		$providers = wpforms_get_providers_options();
+
+		// Bail if no providers exist.
+		if ( ! $providers ) {
+			return;
+		}
+
+		// Bail if no Kit connections exist.
+		if ( ! array_key_exists( 'convertkit', $providers ) ) {
+			return;
+		}
+
+		// Iterate through providers.
+		foreach ( $providers['convertkit'] as $account_id => $settings ) {
+			// Remove v3 API Secret from settings.
+			$settings['api_key']    = '';
+			$settings['api_secret'] = '';
+
+			// Save settings.
+			wpforms_update_providers_options(
+				'convertkit',
+				$settings,
+				$account_id
+			);
+		}
 
 	}
 

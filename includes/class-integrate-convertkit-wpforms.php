@@ -962,6 +962,31 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 		// Get API instance.
 		$api = $this->get_api_instance( $account_id );
 
+		// Check that we're using the Kit WordPress Libraries 2.1.4 or higher.
+		// If another Kit Plugin is active and out of date, its libraries might
+		// be loaded that don't have this method.
+		if ( ! method_exists( $api, 'revoke_tokens' ) ) { // @phpstan-ignore-line Older WordPress Libraries won't have this function.
+			wp_send_json_error(
+				array(
+					'error' => __( 'The Kit WordPress Libraries is missing the `revoke_tokens` method. Please update all Kit WordPress Plugins to their latest versions, and click Disconnect again.', 'integrate-convertkit-wpforms' ),
+				)
+			);
+		}
+
+		// Revoke Access and Refresh Tokens.
+		// See integrate_convertkit_wpforms_delete_credentials() method in functions.php, which is called
+		// by the `convertkit_api_revoke_tokens` action and deletes credentials from the Plugin's settings.
+		$result = $api->revoke_tokens();
+
+		// Bail if an error occurred.
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error(
+				array(
+					'error' => $result->get_error_message(),
+				)
+			);
+		}
+
 		// Delete cached resources.
 		$resource_forms         = new Integrate_ConvertKit_WPForms_Resource_Forms( $api, $account_id );
 		$resource_sequences     = new Integrate_ConvertKit_WPForms_Resource_Sequences( $api, $account_id );

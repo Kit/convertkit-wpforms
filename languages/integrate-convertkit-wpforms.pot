@@ -1,15 +1,15 @@
-# Copyright (C) 2025 Kit
+# Copyright (C) 2026 Kit
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.8.9\n"
+"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.9.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/convertkit-wpforms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-16T07:48:02+00:00\n"
+"POT-Creation-Date: 2026-04-22T07:54:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: integrate-convertkit-wpforms\n"
@@ -253,30 +253,34 @@ msgstr ""
 msgid "Kit: "
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:991
+#: includes/class-integrate-convertkit-wpforms.php:971
+msgid "The Kit WordPress Libraries is missing the `revoke_tokens` method. Please update all Kit WordPress Plugins to their latest versions, and click Disconnect again."
+msgstr ""
+
+#: includes/class-integrate-convertkit-wpforms.php:1016
 msgid "Kit: Email"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:997
+#: includes/class-integrate-convertkit-wpforms.php:1022
 msgid "Kit: First Name"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:1002
+#: includes/class-integrate-convertkit-wpforms.php:1027
 msgid "Kit: Tag"
 msgstr ""
 
 #. translators: ConvertKit Custom Field label
-#: includes/class-integrate-convertkit-wpforms.php:1035
+#: includes/class-integrate-convertkit-wpforms.php:1060
 #, php-format
 msgid "Kit: Custom Field: %s"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:1070
+#: includes/class-integrate-convertkit-wpforms.php:1095
 msgid "No Kit connections exist."
 msgstr ""
 
 #. translators: WPForms ConvertKit Account ID
-#: includes/class-integrate-convertkit-wpforms.php:1078
+#: includes/class-integrate-convertkit-wpforms.php:1103
 #, php-format
 msgid "The Kit connection with ID %s was unregistered."
 msgstr ""

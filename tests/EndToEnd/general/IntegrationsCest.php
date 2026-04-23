@@ -91,17 +91,6 @@ class IntegrationsCest
 			),
 			$reconnectURL
 		);
-
-		// Confirm that the connection can be disconnected.
-		$I->click('Disconnect');
-
-		// Confirm that we want to disconnect.
-		$I->waitForElementVisible('.jconfirm-box');
-		$I->click('.jconfirm-box button.btn-confirm');
-
-		// Confirm no connection is listed.
-		$I->wait(3);
-		$I->dontSee('Connected on:');
 	}
 
 	/**
@@ -138,8 +127,8 @@ class IntegrationsCest
 		// Define connection with invalid API credentials.
 		$I->setupWPFormsIntegration(
 			$I,
-			'fakeAccessToken',
-			'fakeRefreshToken'
+			accessToken: 'fakeAccessToken',
+			refreshToken: 'fakeRefreshToken'
 		);
 
 		// Setup WPForms Form and configuration for this test.
@@ -176,6 +165,57 @@ class IntegrationsCest
 
 		// Check that a notice is displayed that the API credentials are invalid.
 		$I->seeErrorNotice($I, 'Kit for WPForms: Authorization failed. Please reconnect your Kit account.');
+	}
+
+	/**
+	 * Test that the credentials and resources are deleted on disconnect.
+	 *
+	 * @since   1.9.2
+	 *
+	 * @param   EndToEndTester $I  Tester.
+	 */
+	public function testCredentialsAndResourcesAreDeletedOnDisconnect(EndToEndTester $I)
+	{
+		// Define a random account ID.
+		$accountID = 'kit-' . wp_generate_password( 10, false );
+
+		// Fake the API Key, Access and Refresh Tokens; if we revoke the tokens used for tests, future tests will fail.
+		$I->setupWPFormsIntegration(
+			$I,
+			accessToken: 'fakeAccessToken',
+			refreshToken: 'fakeRefreshToken',
+			apiKey: 'fakeAPIKey',
+			apiSecret: 'fakeAPISecret',
+			accountID: $accountID
+		);
+
+		// Load WPForms > Settings > Integrations.
+		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=integrations');
+
+		// Expand Kit integration section.
+		$I->click('#wpforms-integration-convertkit');
+
+		// Disconnect the connection to Kit.
+		$I->waitForElementVisible('a[data-provider="convertkit"]');
+		$I->click('Disconnect');
+
+		// Confirm that we want to disconnect.
+		$I->waitForElementVisible('.jconfirm-box');
+		$I->click('.jconfirm-box button.btn-confirm');
+
+		// Confirm no connection is listed.
+		$I->wait(3);
+		$I->dontSee('Connected on:');
+
+		// Check connection is removed from the settings.
+		// Clicking 'Disconnect' in WPForms removes the connection from the settings,
+		// including any credentials within that connection.
+		$providers = $I->grabOptionFromDatabase('wpforms_providers');
+		$I->assertArrayHasKey('convertkit', $providers);
+		$I->assertCount(0, $providers['convertkit']);
+
+		// Check cached resources are removed from the database on disconnection.
+		$I->dontSeeCachedResourcesInDatabase($I, $accountID);
 	}
 
 	/**

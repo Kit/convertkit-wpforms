@@ -812,11 +812,9 @@ class FormCest
 		// Check that a review request was created.
 		$I->reviewRequestExists($I);
 
-		// Disconnect the account.
-		$I->disconnectAccount($I, $this->accountID);
-
-		// Check that the resources are no longer cached under the given account ID.
-		$I->dontSeeCachedResourcesInDatabase($I, $this->accountID);
+		// Remove the provider connection.
+		// We don't disconnect the account, as this would now revoke the tokens and cause later tests to fail.
+		$I->removeProviderConnection($I, $this->accountID);
 	}
 
 	/**
