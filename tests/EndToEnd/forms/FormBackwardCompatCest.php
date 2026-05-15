@@ -323,8 +323,8 @@ class FormBackwardCompatCest
 		$I->waitForElementVisible('.wpforms-confirmation-scroll');
 		$I->seeInSource('Thanks for contacting us! We will be in touch with you shortly.');
 
-		// Check API to confirm subscriber was sent.
-		$I->apiCheckSubscriberExists($I, $emailAddress, $firstName);
+		// Check subscriber does not exist, as specifying an invalid custom field will result in an API error.
+		$I->apiCheckSubscriberDoesNotExist($I, $emailAddress);
 	}
 
 	/**
