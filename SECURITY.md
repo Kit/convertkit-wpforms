@@ -6,8 +6,8 @@ This security policy applies to public projects under the [Kit organization](htt
 
 If you discover a security vulnerability, please report via any of the below:
 
-- [BugCrowd](https://docs.bugcrowd.com/researchers/reporting-managing-submissions/reporting-a-bug/#creating-a-vulnerability-report)
-- [PatchStack]()
+- [Kit](https://kit.com/report-vulnerability)
+- [PatchStack](https://patchstack.com/database/vdp/48836c47-fab2-44e1-a46d-05f3fcae6c13)
 - [GitHub](https://github.com/Kit/convertkit-wpforms/security/advisories)
 - [Email](mailto:security@kit.com)
 

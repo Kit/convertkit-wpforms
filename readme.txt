@@ -35,6 +35,9 @@ Full plugin documentation is located [here](https://cultivatewp.com/our-plugins/
 
 No. You must first have an account on kit.com, but you do not have to use a paid plan!
 
+= Where do I report security bugs found in this plugin? =
+Please report security bugs found in the source code of the plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/48836c47-fab2-44e1-a46d-05f3fcae6c13). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Screenshots ==
 
 1. WPForms Kit API Connections at WPForms > Settings > Integrations > Kit
