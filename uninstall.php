@@ -37,14 +37,12 @@ foreach ( $providers['convertkit'] as $account_id => $connection ) {
 			'https://api.kit.com/v4/oauth/revoke',
 			array(
 				'headers' => array(
-					'Accept'       => 'application/json',
-					'Content-Type' => 'application/json',
+					'Content-Type' => 'application/x-www-form-urlencoded',
 				),
-				'body'    => wp_json_encode(
-					array(
-						'client_id' => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
-						'token'     => $connection['access_token'],
-					)
+				'body'    => array(
+					'client_id'       => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
+					'token'           => $connection['access_token'],
+					'token_type_hint' => 'access_token',
 				),
 				'timeout' => 5,
 			)
@@ -57,14 +55,12 @@ foreach ( $providers['convertkit'] as $account_id => $connection ) {
 			'https://api.kit.com/v4/oauth/revoke',
 			array(
 				'headers' => array(
-					'Accept'       => 'application/json',
-					'Content-Type' => 'application/json',
+					'Content-Type' => 'application/x-www-form-urlencoded',
 				),
-				'body'    => wp_json_encode(
-					array(
-						'client_id' => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
-						'token'     => $connection['refresh_token'],
-					)
+				'body'    => array(
+					'client_id'       => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
+					'token'           => $connection['refresh_token'],
+					'token_type_hint' => 'refresh_token',
 				),
 				'timeout' => 5,
 			)
