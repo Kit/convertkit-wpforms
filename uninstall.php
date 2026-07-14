@@ -40,7 +40,7 @@ foreach ( $providers['convertkit'] as $account_id => $connection ) {
 					'Content-Type' => 'application/x-www-form-urlencoded',
 				),
 				'body'    => array(
-					'client_id'       => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
+					'client_id'       => '147qqKJeENYp5MqgL6AOShDDcLK3UQeClmcIV1ij3gI',
 					'token'           => $connection['access_token'],
 					'token_type_hint' => 'access_token',
 				),
@@ -58,7 +58,7 @@ foreach ( $providers['convertkit'] as $account_id => $connection ) {
 					'Content-Type' => 'application/x-www-form-urlencoded',
 				),
 				'body'    => array(
-					'client_id'       => 'L0kyADsB3WP5zO5MvUpXQU64gIntQg9BBAIme17r_7A',
+					'client_id'       => '147qqKJeENYp5MqgL6AOShDDcLK3UQeClmcIV1ij3gI',
 					'token'           => $connection['refresh_token'],
 					'token_type_hint' => 'refresh_token',
 				),
