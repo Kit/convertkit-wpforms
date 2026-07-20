@@ -5,7 +5,7 @@ Tags: form, wpforms, convertkit, email, marketing
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.1
-Stable tag: 1.9.5
+Stable tag: 1.9.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -44,6 +44,9 @@ Please report security bugs found in the source code of the plugin through the [
 2. WPForms Kit Form Settings when editing a WPForms Form at Marketing > Kit
 
 == Changelog ==
+
+### 1.9.6 2026-07-20
+* Fix: Uninstall: Use correct client ID for Access and Refresh Token revokation
 
 ### 1.9.5 2026-07-10
 * Fix: Uninstall: Improve Access and Refresh Token revokation
