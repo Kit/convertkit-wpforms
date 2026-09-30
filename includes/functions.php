@@ -148,6 +148,32 @@ function integrate_convertkit_wpforms_maybe_delete_credentials( $result, $client
 
 }
 
+/**
+ * Returns the URL Kit redirects to after the user authorizes the Plugin via OAuth,
+ * including a nonce that is verified before the authorization code is exchanged
+ * for an access token.
+ *
+ * @since   2.0.0
+ *
+ * @param   bool $modal  Whether the OAuth flow is served in the form builder's popup window.
+ * @return  string          OAuth Return URL
+ */
+function integrate_convertkit_wpforms_get_oauth_return_url( $modal = false ) {
+
+	$args = array(
+		'page' => 'wpforms-settings',
+		'view' => 'kit-oauth-' . wp_create_nonce( 'integrate-convertkit-wpforms-oauth' ),
+	);
+
+	// Close the popup window once connected, if the OAuth flow started in the form builder.
+	if ( $modal ) {
+		$args['convertkit-modal'] = '1';
+	}
+
+	return add_query_arg( $args, admin_url( 'admin.php' ) );
+
+}
+
 // Update Access Token when refreshed by the API class.
 add_action( 'convertkit_api_refresh_token', 'integrate_convertkit_wpforms_maybe_update_credentials', 10, 3 );
 

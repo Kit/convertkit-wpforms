@@ -8,6 +8,6 @@
 
 ?>
 
-<a href="<?php echo esc_url( $api->get_oauth_url( admin_url( 'admin.php?page=wpforms-settings&view=integrations' ), get_site_url() ) ); ?>" class="wpforms-btn wpforms-btn-md wpforms-btn-orange">
+<a href="<?php echo esc_url( $api->get_oauth_url( integrate_convertkit_wpforms_get_oauth_return_url(), get_site_url() ) ); ?>" class="wpforms-btn wpforms-btn-md wpforms-btn-orange">
 	<?php esc_html_e( 'Connect to Kit', 'integrate-convertkit-wpforms' ); ?>
 </a>

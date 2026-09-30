@@ -43,17 +43,14 @@ class IntegrationsCest
 		// Click Add New Account button.
 		$I->click('#wpforms-integration-convertkit a[data-provider="convertkit"]');
 
-		// Check that a link to the OAuth auth screen exists and includes the state parameter.
+		// Check that a link to the OAuth auth screen exists.
 		$I->seeInSource('<a href="https://app.kit.com/oauth/authorize?client_id=' . $_ENV['CONVERTKIT_OAUTH_CLIENT_ID'] . '&amp;response_type=code&amp;redirect_uri=' . urlencode( $_ENV['KIT_OAUTH_REDIRECT_URI'] ) );
-		$I->seeInSource(
-			'&amp;state=' . $I->apiEncodeState(
-				$_ENV['WORDPRESS_URL'] . '/wp-admin/admin.php?page=wpforms-settings&view=integrations',
-				$_ENV['CONVERTKIT_OAUTH_CLIENT_ID']
-			)
-		);
+
+		// Check the state parameter returns to the integrations screen, with a nonce.
+		$I->waitForElementVisible('.wpforms-settings-provider-accounts-connect a');
+		$I->apiCheckOAuthURLReturnsToIntegrationsScreen($I, $I->grabAttributeFrom('.wpforms-settings-provider-accounts-connect a', 'href'));
 
 		// Click Connect to Kit button.
-		$I->waitForElementVisible('.wpforms-settings-provider-accounts-connect a');
 		$I->click('Connect to Kit');
 
 		// Confirm the ConvertKit hosted OAuth login screen is displayed.
@@ -84,13 +81,7 @@ class IntegrationsCest
 			'https://app.kit.com/oauth/authorize?client_id=' . $_ENV['CONVERTKIT_OAUTH_CLIENT_ID'] . '&response_type=code&redirect_uri=' . urlencode( $_ENV['KIT_OAUTH_REDIRECT_URI'] ),
 			$reconnectURL
 		);
-		$I->assertStringContainsString(
-			'&state=' . $I->apiEncodeState(
-				$_ENV['WORDPRESS_URL'] . '/wp-admin/admin.php?page=wpforms-settings&view=integrations',
-				$_ENV['CONVERTKIT_OAUTH_CLIENT_ID']
-			),
-			$reconnectURL
-		);
+		$I->apiCheckOAuthURLReturnsToIntegrationsScreen($I, $reconnectURL);
 	}
 
 	/**
@@ -216,6 +207,74 @@ class IntegrationsCest
 
 		// Check cached resources are removed from the database on disconnection.
 		$I->dontSeeCachedResourcesInDatabase($I, $accountID);
+	}
+
+	/**
+	 * Test that an authorization code is not exchanged for an access token when the request
+	 * is unauthenticated, as admin-ajax.php runs `init` for logged out requests.
+	 *
+	 * @since   2.0.0
+	 *
+	 * @param   EndToEndTester $I  Tester.
+	 */
+	public function testAuthorizationCodeNotExchangedWhenUnauthenticated(EndToEndTester $I)
+	{
+		// Setup Kit connection.
+		$accountID = $I->setupWPFormsIntegration($I);
+
+		// Logout.
+		$I->logOut();
+
+		// Attempt to exchange an authorization code without being logged in.
+		$I->amOnPage('/wp-admin/admin-ajax.php?action=x&page=wpforms-settings&view=integrations&code=fakeAuthorizationCode');
+		$I->amOnPage('/wp-admin/admin-ajax.php?action=x&page=wpforms-settings&view=kit-oauth-invalid&code=fakeAuthorizationCode');
+
+		// Confirm the authorization code was not exchanged, and no connection was added.
+		$I->apiCheckAuthorizationCodeNotExchanged($I);
+		$this->_checkOnlyConnectionIs($I, $accountID);
+	}
+
+	/**
+	 * Test that an authorization code is not exchanged for an access token when an
+	 * Administrator loads the integrations screen without a valid nonce, such as from
+	 * a malicious link.
+	 *
+	 * @since   2.0.0
+	 *
+	 * @param   EndToEndTester $I  Tester.
+	 */
+	public function testAuthorizationCodeNotExchangedWithoutNonce(EndToEndTester $I)
+	{
+		// Setup Kit connection.
+		$accountID = $I->setupWPFormsIntegration($I);
+
+		// Attempt to exchange an authorization code without a nonce.
+		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=integrations&code=fakeAuthorizationCode');
+
+		// Attempt to exchange an authorization code with an invalid nonce, confirming an error is displayed.
+		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=kit-oauth-invalid&code=fakeAuthorizationCode');
+		$I->see('The authorization request could not be verified. Please click Connect to Kit again.');
+
+		// Confirm the authorization code was not exchanged, and no connection was added.
+		$I->apiCheckAuthorizationCodeNotExchanged($I);
+		$this->_checkOnlyConnectionIs($I, $accountID);
+	}
+
+	/**
+	 * Checks the given WPForms Account ID is the only Kit connection, and its
+	 * credentials were not changed.
+	 *
+	 * @since   2.0.0
+	 *
+	 * @param   EndToEndTester $I          Tester.
+	 * @param   string         $accountID  WPForms Account ID.
+	 */
+	private function _checkOnlyConnectionIs(EndToEndTester $I, $accountID)
+	{
+		$providers = $I->grabOptionFromDatabase('wpforms_providers');
+		$I->assertEquals([ $accountID ], array_keys($providers['convertkit']));
+		$I->assertEquals($_ENV['CONVERTKIT_OAUTH_ACCESS_TOKEN'], $providers['convertkit'][ $accountID ]['access_token']);
+		$I->assertEquals($_ENV['CONVERTKIT_OAUTH_REFRESH_TOKEN'], $providers['convertkit'][ $accountID ]['refresh_token']);
 	}
 
 	/**
