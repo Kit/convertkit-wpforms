@@ -162,7 +162,7 @@ function integrate_convertkit_wpforms_get_oauth_return_url( $modal = false ) {
 
 	$args = array(
 		'page' => 'wpforms-settings',
-		'view' => 'kit-oauth-' . wp_create_nonce( 'integrate-convertkit-wpforms-oauth' ),
+		'view' => 'integrate-convertkit-wpforms-oauth-' . wp_create_nonce( 'integrate-convertkit-wpforms-oauth' ),
 	);
 
 	// Close the popup window once connected, if the OAuth flow started in the form builder.

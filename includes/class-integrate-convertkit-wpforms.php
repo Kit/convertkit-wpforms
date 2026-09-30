@@ -972,14 +972,14 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 
 		// Return false if the view isn't for this Plugin's OAuth callback.
 		$view = sanitize_key( wp_unslash( $_REQUEST['view'] ) );
-		if ( strpos( $view, 'kit-oauth-' ) !== 0 ) {
+		if ( strpos( $view, 'integrate-convertkit-wpforms-oauth-' ) !== 0 ) {
 			return false;
 		}
 
 		// phpcs:enable
 
 		// Return the nonce.
-		return substr( $view, strlen( 'kit-oauth-' ) );
+		return substr( $view, strlen( 'integrate-convertkit-wpforms-oauth-' ) );
 
 	}
 

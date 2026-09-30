@@ -227,7 +227,7 @@ class IntegrationsCest
 
 		// Attempt to exchange an authorization code without being logged in.
 		$I->amOnPage('/wp-admin/admin-ajax.php?action=x&page=wpforms-settings&view=integrations&code=fakeAuthorizationCode');
-		$I->amOnPage('/wp-admin/admin-ajax.php?action=x&page=wpforms-settings&view=kit-oauth-invalid&code=fakeAuthorizationCode');
+		$I->amOnPage('/wp-admin/admin-ajax.php?action=x&page=wpforms-settings&view=integrate-convertkit-wpforms-oauth-invalid&code=fakeAuthorizationCode');
 
 		// Confirm the authorization code was not exchanged, and no connection was added.
 		$I->apiCheckAuthorizationCodeNotExchanged($I);
@@ -252,7 +252,7 @@ class IntegrationsCest
 		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=integrations&code=fakeAuthorizationCode');
 
 		// Attempt to exchange an authorization code with an invalid nonce, confirming an error is displayed.
-		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=kit-oauth-invalid&code=fakeAuthorizationCode');
+		$I->amOnAdminPage('admin.php?page=wpforms-settings&view=integrate-convertkit-wpforms-oauth-invalid&code=fakeAuthorizationCode');
 		$I->see('The authorization request could not be verified. Please click Connect to Kit again.');
 
 		// Confirm the authorization code was not exchanged, and no connection was added.
