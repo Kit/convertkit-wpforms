@@ -106,7 +106,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 		// Inject Reconnect button for each Kit account.
 		$reconnect_button = sprintf(
 			'<a href="%s" class="%s-reconnect">%s</a>',
-			esc_url( $api->get_oauth_url( admin_url( 'admin.php?page=wpforms-settings&view=integrations' ) ) ),
+			esc_url( $api->get_oauth_url( integrate_convertkit_wpforms_get_oauth_return_url() ) ),
 			esc_attr( $this->slug ),
 			esc_html__( 'Reconnect', 'integrate-convertkit-wpforms' )
 		);
@@ -656,7 +656,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 
 			return sprintf(
 				'<div class="wpforms-connection-block"><a href="%s" class="wpforms-btn wpforms-btn-md wpforms-btn-orange" data-provider="convertkit" target="_blank" rel="noopener noreferrer">%s</a></div>',
-				esc_url( $api->get_oauth_url( admin_url( 'admin.php?page=wpforms-settings&view=integrations&convertkit-modal=1' ) ) ),
+				esc_url( $api->get_oauth_url( integrate_convertkit_wpforms_get_oauth_return_url( true ) ) ),
 				esc_html__( 'Connect to Kit', 'integrate-convertkit-wpforms' )
 			);
 		}
@@ -815,28 +815,49 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 	 */
 	public function maybe_get_and_store_access_token() {
 
+		// phpcs:disable WordPress.Security.NonceVerification
+
 		// Bail if we're not on the integration screen.
-		if ( ! array_key_exists( 'page', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+		if ( ! array_key_exists( 'page', $_REQUEST ) ) {
 			return;
 		}
-		if ( sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) !== 'wpforms-settings' ) { // phpcs:ignore WordPress.Security.NonceVerification
+		if ( sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) !== 'wpforms-settings' ) {
+			return;
+		}
+		if ( ! array_key_exists( 'view', $_REQUEST ) ) {
+			return;
+		}
+		if ( sanitize_text_field( wp_unslash( $_REQUEST['view'] ) ) !== 'integrations' ) {
 			return;
 		}
 
-		if ( ! array_key_exists( 'view', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-			return;
-		}
-		if ( $_REQUEST['view'] !== 'integrations' ) { // phpcs:ignore WordPress.Security.NonceVerification
+		// Bail if no authorization code is included in the request, as this isn't an OAuth callback.
+		if ( ! array_key_exists( 'code', $_REQUEST ) ) {
 			return;
 		}
 
-		// Bail if no authorization code is included in the request.
-		if ( ! array_key_exists( 'code', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-			return;
+		// phpcs:enable
+
+		// Redirect to the integrations screen if the user isn't permitted to manage WPForms settings.
+		if ( ! wpforms_current_user_can() ) {
+			wp_safe_redirect( $this->get_integrations_url() );
+			exit();
+		}
+
+		// Redirect with an error if the nonce is missing or invalid.
+		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_key( $_REQUEST['nonce'] ), INTEGRATE_CONVERTKIT_WPFORMS_NONCE_ACTION_OAUTH_CONNECT ) ) {
+			wp_safe_redirect(
+				$this->get_integrations_url(
+					array(
+						'error_description' => __( 'The authorization request could not be verified. Please click Connect to Kit again.', 'integrate-convertkit-wpforms' ),
+					)
+				)
+			);
+			exit();
 		}
 
 		// Sanitize token.
-		$authorization_code = sanitize_text_field( wp_unslash( $_REQUEST['code'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
+		$authorization_code = sanitize_text_field( wp_unslash( $_REQUEST['code'] ) );
 
 		// Exchange the authorization code and verifier for an access token.
 		$api    = new Integrate_ConvertKit_WPForms_API(
@@ -932,6 +953,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 		exit();
 
 	}
+
 
 	/**
 	 * Deletes cached resources when a ConvertKit account is disconnected in WPForms
