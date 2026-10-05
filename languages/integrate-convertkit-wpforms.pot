@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 1.9.9\n"
+"Project-Id-Version: Kit (formerly ConvertKit) for WPForms 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/convertkit-wpforms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-15T13:15:08+00:00\n"
+"POT-Creation-Date: 2026-10-05T02:23:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: integrate-convertkit-wpforms\n"
@@ -253,34 +253,38 @@ msgstr ""
 msgid "Kit: "
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:971
+#: includes/class-integrate-convertkit-wpforms.php:852
+msgid "The authorization request could not be verified. Please click Connect to Kit again."
+msgstr ""
+
+#: includes/class-integrate-convertkit-wpforms.php:993
 msgid "The Kit WordPress Libraries is missing the `revoke_tokens` method. Please update all Kit WordPress Plugins to their latest versions, and click Disconnect again."
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:1016
+#: includes/class-integrate-convertkit-wpforms.php:1038
 msgid "Kit: Email"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:1022
+#: includes/class-integrate-convertkit-wpforms.php:1044
 msgid "Kit: First Name"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:1027
+#: includes/class-integrate-convertkit-wpforms.php:1049
 msgid "Kit: Tag"
 msgstr ""
 
 #. translators: ConvertKit Custom Field label
-#: includes/class-integrate-convertkit-wpforms.php:1060
+#: includes/class-integrate-convertkit-wpforms.php:1082
 #, php-format
 msgid "Kit: Custom Field: %s"
 msgstr ""
 
-#: includes/class-integrate-convertkit-wpforms.php:1095
+#: includes/class-integrate-convertkit-wpforms.php:1117
 msgid "No Kit connections exist."
 msgstr ""
 
 #. translators: WPForms ConvertKit Account ID
-#: includes/class-integrate-convertkit-wpforms.php:1103
+#: includes/class-integrate-convertkit-wpforms.php:1125
 #, php-format
 msgid "The Kit connection with ID %s was unregistered."
 msgstr ""
