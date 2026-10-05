@@ -31,6 +31,7 @@ define( 'INTEGRATE_CONVERTKIT_WPFORMS_PATH', __DIR__ );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_VERSION', '1.9.9' );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_CLIENT_ID', '147qqKJeENYp5MqgL6AOShDDcLK3UQeClmcIV1ij3gI' );
 define( 'INTEGRATE_CONVERTKIT_WPFORMS_OAUTH_REDIRECT_URI', 'https://app.kit.com/wordpress/redirect' );
+define( 'INTEGRATE_CONVERTKIT_WPFORMS_NONCE_ACTION_OAUTH_CONNECT', 'integrate-convertkit-wpforms-oauth-connect' );
 
 // Load shared classes, if they have not been included by another ConvertKit Plugin.
 if ( ! trait_exists( 'ConvertKit_API_Traits' ) && ! trait_exists( 'ConvertKit_API\ConvertKit_API_Traits' ) ) {

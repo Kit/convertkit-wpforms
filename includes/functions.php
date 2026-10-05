@@ -161,8 +161,9 @@ function integrate_convertkit_wpforms_maybe_delete_credentials( $result, $client
 function integrate_convertkit_wpforms_get_oauth_return_url( $modal = false ) {
 
 	$args = array(
-		'page' => 'wpforms-settings',
-		'view' => 'integrate-convertkit-wpforms-oauth-' . wp_create_nonce( 'integrate-convertkit-wpforms-oauth' ),
+		'page'  => 'wpforms-settings',
+		'view'  => 'integrations',
+		'nonce' => wp_create_nonce( INTEGRATE_CONVERTKIT_WPFORMS_NONCE_ACTION_OAUTH_CONNECT ),
 	);
 
 	// Close the popup window once connected, if the OAuth flow started in the form builder.

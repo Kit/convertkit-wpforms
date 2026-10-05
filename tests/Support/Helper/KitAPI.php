@@ -85,7 +85,8 @@ class KitAPI extends \Codeception\Module
 		$state = $this->apiDecodeStateFromOAuthURL($url);
 		$I->assertEquals($_ENV['CONVERTKIT_OAUTH_CLIENT_ID'], $state['client_id']);
 		$I->assertStringStartsWith($_ENV['WORDPRESS_URL'] . '/wp-admin/admin.php?', $state['return_to']);
-		$I->assertStringContainsString('page=wpforms-settings&view=integrate-convertkit-wpforms-oauth-', $state['return_to']);
+		$I->assertStringContainsString('page=wpforms-settings&view=integrations', $state['return_to']);
+		$I->assertStringContainsString('nonce=', $state['return_to']);
 	}
 
 	/**
