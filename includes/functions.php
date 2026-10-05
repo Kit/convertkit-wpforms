@@ -168,7 +168,7 @@ function integrate_convertkit_wpforms_get_oauth_return_url( $modal = false ) {
 
 	// Close the popup window once connected, if the OAuth flow started in the form builder.
 	if ( $modal ) {
-		$args['convertkit-modal'] = '1';
+		$args['kit-modal'] = '1';
 	}
 
 	return add_query_arg( $args, admin_url( 'admin.php' ) );
