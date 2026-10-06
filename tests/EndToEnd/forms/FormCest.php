@@ -108,6 +108,13 @@ class FormCest
 		// Wait for Connect to Kit button to display, as no connections exist at WPForms > Settings > Integrations.
 		$I->waitForElementVisible('a[data-provider="convertkit"]');
 
+		// Check the OAuth URL returns to the integrations screen, flagged as served in the popup window.
+		$oauthURL = $I->grabAttributeFrom('a[data-provider="convertkit"]', 'href');
+		$I->apiCheckOAuthURLReturnsToIntegrationsScreen($I, $oauthURL);
+		$state = $I->apiDecodeStateFromOAuthURL($oauthURL);
+		$I->assertStringContainsString('&kit-modal=1', $state['return_to']);
+		$I->assertStringNotContainsString('convertkit-modal', $state['return_to']);
+
 		// Click the button and confirm the OAuth popup displays.
 		$I->click('a[data-provider="convertkit"]');
 

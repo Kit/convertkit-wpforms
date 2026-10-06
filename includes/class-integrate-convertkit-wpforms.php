@@ -937,7 +937,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 
 		// If this request is served in a popup window (i.e. from the form builder),
 		// serve a view that will close the popup.
-		if ( array_key_exists( 'convertkit-modal', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( array_key_exists( 'kit-modal', $_REQUEST ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			require INTEGRATE_CONVERTKIT_WPFORMS_PATH . '/views/backend/close-modal.php';
 			exit();
 		}
