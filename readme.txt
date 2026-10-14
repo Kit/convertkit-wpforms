@@ -5,7 +5,7 @@ Tags: form, wpforms, convertkit, email, marketing
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.1
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -44,6 +44,10 @@ Please report security bugs found in the source code of the plugin through the [
 2. WPForms Kit Form Settings when editing a WPForms Form at Marketing > Kit
 
 == Changelog ==
+
+### 2.0.1 2026-10-15
+* Updated: OAuth: Use `kit-modal` parameter when connecting to Kit from the form builder
+* Updated: WordPress Libraries to 2.8.0
 
 ### 2.0.0 2026-10-05
 * Fix: OAuth: Connect: Check user has required permissions
