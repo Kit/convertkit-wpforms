@@ -39,7 +39,7 @@ class Integrate_ConvertKit_WPForms extends WPForms_Provider {
 	 *
 	 * @var     string
 	 */
-	private $register_url = 'https://app.kit.com/users/signup?utm_source=wordpress&utm_content=convertkit-wpforms';
+	private $register_url = 'https://app.kit.com/users/signup?plan=kit-free&utm_source=wordpress&utm_content=convertkit-wpforms';
 
 	/**
 	 * Initialize ConvertKit as a WPForms Provider.
