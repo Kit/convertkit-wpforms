@@ -376,7 +376,7 @@ class WPForms extends \Codeception\Module
 		$I->click('#wpforms-panel-providers a.wpforms-panel-sidebar-section-convertkit');
 
 		// Click Add New Connection.
-		$I->click('Add New Connection');
+		$I->click('Add New Connection', '#convertkit-provider');
 
 		// Define name for connection.
 		$I->waitForElementVisible('.jconfirm-content');
