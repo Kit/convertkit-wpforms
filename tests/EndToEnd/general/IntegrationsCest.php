@@ -47,11 +47,11 @@ class IntegrationsCest
 		$I->seeInSource('<a href="https://app.kit.com/oauth/authorize?client_id=' . $_ENV['CONVERTKIT_OAUTH_CLIENT_ID'] . '&amp;response_type=code&amp;redirect_uri=' . urlencode( $_ENV['KIT_OAUTH_REDIRECT_URI'] ) );
 
 		// Check the state parameter returns to the integrations screen, with a nonce.
-		$I->waitForElementVisible('.wpforms-settings-provider-accounts-connect a');
-		$I->apiCheckOAuthURLReturnsToIntegrationsScreen($I, $I->grabAttributeFrom('.wpforms-settings-provider-accounts-connect a', 'href'));
+		$I->waitForElementVisible('#wpforms-integration-convertkit .wpforms-settings-provider-accounts-connect a');
+		$I->apiCheckOAuthURLReturnsToIntegrationsScreen($I, $I->grabAttributeFrom('#wpforms-integration-convertkit .wpforms-settings-provider-accounts-connect a', 'href'));
 
 		// Click Connect to Kit button.
-		$I->click('Connect to Kit');
+		$I->click('Connect to Kit', '#wpforms-integration-convertkit .wpforms-settings-provider-accounts-connect-fields');
 
 		// Confirm the ConvertKit hosted OAuth login screen is displayed.
 		$I->waitForElementVisible('body.sessions');
@@ -137,7 +137,7 @@ class IntegrationsCest
 		$I->click('#wpforms-panel-providers a.wpforms-panel-sidebar-section-convertkit');
 
 		// Click Add New Connection.
-		$I->click('Add New Connection');
+		$I->click('Add New Connection', '#convertkit-provider');
 
 		// Define name for connection.
 		$I->waitForElementVisible('.jconfirm-content');
